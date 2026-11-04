@@ -59,7 +59,7 @@ El reparto $x^g$ producido por el Algoritmo~\ref{alg:reparto} es óptimo.
 \]
 por suma telescópica. El primer término no depende del reparto, así que maximizar la utilidad equivale a maximizar la suma de las $B$ ganancias marginales usadas.
 
-\textbf{Paso 2: el voraz toma las $B$ mayores ganancias.} En cada iteración el montículo contiene la próxima ganancia de cada nodo, y por concavidad esa es la mayor ganancia aún disponible de ese nodo. Por lo tanto el voraz toma, en cada paso, la mayor ganancia disponible entre todas. Sea $\lambda$ la menor ganancia que tomó el voraz. Entonces toda ganancia tomada es $\ge\lambda$, y toda ganancia no tomada es $\le\lambda$.
+\textbf{Paso 2: el voraz toma las $B$ mayores ganancias.} En cada iteración el montículo contiene la próxima ganancia de cada nodo, y por concavidad esa es la mayor ganancia aún disponible de ese nodo. Por lo tanto el voraz toma, en cada paso, la mayor ganancia disponible entre todas. \textbf{Sea $\lambda$ la menor ganancia que tomó el voraz}. Entonces toda ganancia tomada es $\ge\lambda$, y toda ganancia no tomada es $\le\lambda$.
 
 \textbf{Paso 3: intercambio.} Sea $x^*$ un reparto óptimo con $x^*\ne x^g$. Por la observación que sigue a la Definición~\ref{def:rep}, se puede tomar $x^*$ con $\sum_i x^*_i=B$, igual que el voraz. Como ambos suman $B$, existen nodos $i$ y $j$ con $x^*_i > x^g_i$ y $x^*_j < x^g_j$. Se construye $x'$ moviendo una unidad de $i$ a $j$ en $x^*$. El cambio en la utilidad es
 \[

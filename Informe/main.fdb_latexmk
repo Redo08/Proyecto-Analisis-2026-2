@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber main"] 1793755035.14524 "main.bcf" "main.bbl" "main" 1793755089.81254 0
-  "main.bcf" 1793755088 109190 90d8013118d34da4fd3a956a863c60c6 "pdflatex"
+["biber main"] 1793763249.27294 "main.bcf" "main.bbl" "main" 1793763277.10253 0
+  "main.bcf" 1793763276 109063 29325dbb5caf1d7a6c258b678821d7f5 "pdflatex"
   "referencias.bib" 1793580242 1660 f06606ac400753936ee2054858aff0c2 ""
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1793755081.684 "c:/Users/juany/RepoProyecto/Informe/main.tex" "main.pdf" "main" 1793755089.81353 0
+["pdflatex"] 1793763269.89197 "c:/Users/juany/RepoProyecto/Informe/main.tex" "main.pdf" "main" 1793763277.10545 0
   "C:/Users/juany/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1793329855 81068 299f700eb05b1217173e62b88b513bd0 ""
   "C:/Users/juany/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1793329673 13402714 f3c98ae5d7ebbce41b92f2c5e91aebfe ""
   "C:/Users/juany/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc" 1256929440 2375 baa924870cfb487815765f9094cf3728 ""
@@ -391,19 +391,19 @@
   "c:/Users/juany/RepoProyecto/Informe/main.tex" 1793755080 4126 79edd48efa9b4964af2ed7fefc841b48 ""
   "code/algoritmos.py" 1793580240 4595 6fa28a5544eb6305a594a695b2cf7f41 ""
   "estilo.cls" 1793580242 10099 486a4dbafda76fcb318e11aa0fc3f528 ""
-  "main.atfi" 1793755088 23 33e109ecf84d2ac55814cb2442ea01dc "pdflatex"
-  "main.aux" 1793755088 12567 ee614e476aa387ae6807c490b8d5029a "pdflatex"
-  "main.bbl" 1793755039 11640 d8f68e5c06d520fb563006778d709469 "biber main"
-  "main.out" 1793755088 7805 5c7ca3d88bfbe5c8cd5ca63f69cabfb5 "pdflatex"
-  "main.run.xml" 1793755088 2356 506082663aee5332b39509852b3acd28 "pdflatex"
+  "main.atfi" 1793763276 23 33e109ecf84d2ac55814cb2442ea01dc "pdflatex"
+  "main.aux" 1793763276 12214 7c89fa075ad73fbe61a7f57318ccc310 "pdflatex"
+  "main.bbl" 1793763254 7791 e8325290136f2dbd3a5d2722c5ffa855 "biber main"
+  "main.out" 1793763276 7805 5c7ca3d88bfbe5c8cd5ca63f69cabfb5 "pdflatex"
+  "main.run.xml" 1793763276 2356 506082663aee5332b39509852b3acd28 "pdflatex"
   "main.tex" 1793755080 4126 79edd48efa9b4964af2ed7fefc841b48 ""
-  "main.toc" 1793755088 5067 052a8797109a5b725df1bc5fc220354c "pdflatex"
-  "tex/algoritmos.tex" 1793580242 18338 15acd306480c9decf1c15a08e2481315 ""
+  "main.toc" 1793763276 5067 58317dcc34e8d31f6aa0ad214a7944a8 "pdflatex"
+  "tex/algoritmos.tex" 1793761563 18347 c5fabf73223b9451cc6aeff0f63c3660 ""
   "tex/conclusiones.tex" 1793753710 1937 20d1bdbc9466b91cafda098961c5a2a1 ""
   "tex/consideraciones.tex" 1793580242 7022 e287d780fecd3d3d9088cfbb8d2d4470 ""
   "tex/graficos.tex" 1793753548 11837 e44730e63bcc1bc58938a2d24e87d31d ""
-  "tex/problemas.tex" 1793754980 6899 0ccef8048d3ea8a220bb9ece2861a924 ""
-  "tex/reduccion.tex" 1793580242 12233 3483407436a22665dc762a8ede3f6201 ""
+  "tex/problemas.tex" 1793758142 7073 6812237ad1032c5a6800cfa1f98d0c81 ""
+  "tex/reduccion.tex" 1793763240 11318 6ee7e89812e06209c3050b8fde6664ec ""
   (generated)
   "main.atfi"
   "main.aux"

@@ -2378,11 +2378,9 @@
     <bcf:citekey order="2" intorder="1">nemhauser1978</bcf:citekey>
     <bcf:citekey order="3" intorder="1">feige1998</bcf:citekey>
     <bcf:citekey order="4" intorder="1">feige1998</bcf:citekey>
-    <bcf:citekey order="5" intorder="1">karp1972</bcf:citekey>
-    <bcf:citekey order="5" intorder="2">garey1979</bcf:citekey>
-    <bcf:citekey order="6" intorder="1">nemhauser1978</bcf:citekey>
-    <bcf:citekey order="7" intorder="1">feige1998</bcf:citekey>
-    <bcf:citekey order="8" intorder="1">khuller1999</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">nemhauser1978</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">feige1998</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">khuller1999</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">

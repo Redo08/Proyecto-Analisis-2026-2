@@ -34,21 +34,32 @@ Por eso la función de eficiencia es de dos variables, $T(N,B)$. Se supone que e
 \begin{observacion}[Pseudo-polinomialidad]
 $B$ se escribe con solo $\lceil\log_2(B+1)\rceil$ bits, pero el voraz hace $B$ pasos. Su costo es polinomial en el \emph{valor} de $B$ y exponencial en la \emph{longitud} de su representación; es decir, es \textbf{pseudo-polinomial}, el mismo fenómeno de la mochila 0/1. La Sección~\ref{sec:pseudo} lo discute y muestra cómo eliminar la dependencia en $B$.
 \end{observacion}
-
 \subsection{Problema 2: selección de participantes (\SEL)}
 
 \begin{definicion}[Selección de participantes]\label{def:sel}
-  
-\textbf{Entrada:} un conjunto de nodos candidatos $V=\{1,\dots,N\}$; una función de utilidad conjunta $f:\pot{V}\to\R_{\ge 0}$, que asigna a cada grupo de nodos $A\subseteq V$ su utilidad $f(A)$; y un cupo $k\in\N$ con $k<N$.
 
-\textbf{Salida:} un grupo $A\subseteq V$ con $|A|= k$.
+\textbf{Entrada:}
+
+Un conjunto de nodos candidatos $V=\{1,\dots,N\}$; una función de utilidad conjunta
+$f:\pot{V}\to\R_{\ge 0}$, que asigna a cada grupo de nodos $A\subseteq V$
+su utilidad $f(A)$; y un cupo $k\in\N$ con $k<N$.
+
+\vspace{0.2cm}
+
+\textbf{Salida:}
+
+Un grupo $A\subseteq V$ con $|A|=k$.
+
+\vspace{0.2cm}
 
 \textbf{Objetivo:}
-\[
-\max_{A\subseteq V}\ f(A) \quad\text{sujeto a}\quad |A|\le k .
-\]
-\end{definicion}
 
+\[
+\max_{A\subseteq V}\ f(A)
+\quad\text{sujeto a}\quad |A|\le k.
+\]
+
+\end{definicion}
 Como $f$ es monótona, siempre existe un óptimo con $|A|=k$, de modo que pedir $|A|\le k$ o $|A|=k$ da el mismo valor óptimo.
 
 \paragraph{Propiedades de $f$.} Para $A\subseteq V$ y $j\notin A$ se define la ganancia marginal
@@ -95,6 +106,9 @@ El costo de leer la descripción de $f$ queda dentro de $\tau$. Por eso las func
 \SEL & Dados $V$, $f$, $k$ y un umbral $t$: ¿existe $A\subseteq V$ con $|A|\le k$ y $f(A)\ge t$? \\
 \bottomrule
 \end{tabular}
+\vspace{0.3cm}
+
+\textit{Nota:} Introducimos el umbral $t$ ya que sirve para convertir un problema de optimización en una pregunta de sí o no.
 \end{center}
 
 \subsection{Qué problema es el ``B'' de la reducción}\label{sec:cualB}

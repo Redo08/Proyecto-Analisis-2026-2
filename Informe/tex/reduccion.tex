@@ -26,9 +26,6 @@ La demostración sigue cinco pasos:
 %% ---------------------------------------------------------------------
 \subsection{Paso 1: problema de partida, Cobertura Máxima}
 
-\begin{definicion}[\SC]
-\textbf{Entrada:} un universo finito $U$, una colección $\mathcal S=\{S_1,\dots,S_m\}$ con $S_j\subseteq U$, y un entero $k$. \textbf{Pregunta:} ¿existen $k$ conjuntos de $\mathcal S$ cuya unión es $U$?
-\end{definicion}
 
 \begin{definicion}[\MC]
 \textbf{Entrada:} $U$, $\mathcal S=\{S_1,\dots,S_m\}$, un entero $k$ y un umbral $t$. \textbf{Pregunta:} ¿existen $k$ conjuntos de $\mathcal S$ cuya unión tiene al menos $t$ elementos?
@@ -37,13 +34,6 @@ La demostración sigue cinco pasos:
 \begin{lema}\label{lem:mc}
 \MC{} es NP-completo.
 \end{lema}
-\begin{proof}
-\SC{} es NP-completo \parencite{karp1972,garey1979}. Se construye $\varphi_1(U,\mathcal S,k) = (U,\mathcal S,k,\,t=|U|)$, que solo agrega el número $|U|$ y toma tiempo lineal. Como toda unión de conjuntos de $\mathcal S$ está contenida en $U$, tiene a lo sumo $|U|$ elementos, y por lo tanto
-\[
-\Big|\bigcup_{\text{elegidos}} S_j\Big| \ge |U| \iff \bigcup_{\text{elegidos}} S_j = U .
-\]
-Las dos preguntas tienen la misma respuesta, así que $\SC\le_p\MC$ y, por el Teorema~\ref{teo:herramienta}, \MC{} es NP-difícil. Además $\MC\in\mathrm{NP}$: dados $k$ índices como certificado, la unión se calcula y se cuenta en tiempo polinomial.
-\end{proof}
 
 \textbf{Por qué se escoge \MC.} Su estructura coincide con la de nuestro problema: escoger $k$ elementos (conjuntos o nodos) para maximizar algo en lo que las contribuciones se solapan. Un elemento cubierto por dos conjuntos cuenta una sola vez, igual que la información redundante entre dos nodos.
 
