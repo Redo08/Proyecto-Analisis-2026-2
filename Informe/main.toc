@@ -1,0 +1,54 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Introducción}{3}{section.1}%
+\contentsline {section}{\numberline {2}Preliminares}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Notación asintótica}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Modelo de costo}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Problemas de decisión, P, NP y reducciones}{3}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}El conjunto potencia $2^{V}$}{4}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Formulación matemática de los problemas}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Problema 1: reparto óptimo del presupuesto (\textsc {Rep-Pres})}{6}{subsection.3.1}%
+\contentsline {paragraph}{Ganancia marginal.}{6}{definicion.3.1}%
+\contentsline {paragraph}{Tamaño de la entrada y por qué es la medida adecuada.}{6}{observacion.3.2}%
+\contentsline {subsection}{\numberline {3.2}Problema 2: selección de participantes (\textsc {Sel-Sub})}{6}{subsection.3.2}%
+\contentsline {paragraph}{Propiedades de $f$.}{7}{definicion.3.4}%
+\contentsline {paragraph}{Utilidad implementada.}{7}{observacion.3.5}%
+\contentsline {paragraph}{Tamaño de la entrada y por qué es la medida adecuada.}{7}{observacion.3.5}%
+\contentsline {subsection}{\numberline {3.3}Versiones de decisión}{7}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Qué problema es el ``B'' de la reducción}{8}{subsection.3.4}%
+\contentsline {section}{\numberline {4}Algoritmos y funciones de eficiencia}{9}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Parte 1: algoritmo voraz con montículo}{9}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Algoritmo}{9}{subsubsection.4.1.1}%
+\contentsline {paragraph}{Correspondencia con la implementación.}{9}{AlgoLine.1.9}%
+\contentsline {subsubsection}{\numberline {4.1.2}Optimalidad (argumento de intercambio)}{9}{subsubsection.4.1.2}%
+\contentsline {subsubsection}{\numberline {4.1.3}Función de eficiencia por conteo de operaciones}{10}{subsubsection.4.1.3}%
+\contentsline {paragraph}{Peor caso.}{10}{subsubsection.4.1.3}%
+\contentsline {paragraph}{Mejor caso.}{11}{subsubsection.4.1.3}%
+\contentsline {paragraph}{Cotas del algoritmo.}{11}{subsubsection.4.1.3}%
+\contentsline {subsubsection}{\numberline {4.1.4}Pseudo-polinomialidad y presupuesto continuo}{11}{subsubsection.4.1.4}%
+\contentsline {paragraph}{Por qué la cota es pseudo-polinomial.}{11}{subsubsection.4.1.4}%
+\contentsline {paragraph}{Cómo quitar la dependencia en $B$ (método del umbral).}{11}{subsubsection.4.1.4}%
+\contentsline {paragraph}{Presupuesto continuo (nivelación, \emph {water-filling}).}{11}{subsubsection.4.1.4}%
+\contentsline {subsection}{\numberline {4.2}Parte 2: algoritmo exacto (búsqueda exhaustiva)}{12}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Recurrencia sin poda: $\Theta (2^N)$}{12}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Recurrencia con cupo $k$: $\binom {N}{k}$ evaluaciones}{12}{subsubsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Por qué esto no es polinomial}{13}{subsubsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.3}Parte 2: algoritmo voraz de aproximación}{13}{subsection.4.3}%
+\contentsline {paragraph}{Correspondencia con la implementación.}{13}{AlgoLine.3.10}%
+\contentsline {paragraph}{Conteo de evaluaciones.}{14}{AlgoLine.3.10}%
+\contentsline {paragraph}{Valor de $\tau $ para la utilidad implementada.}{14}{AlgoLine.3.10}%
+\contentsline {paragraph}{Garantía de aproximación.}{14}{AlgoLine.3.10}%
+\contentsline {subsection}{\numberline {4.4}Resumen de funciones de eficiencia}{14}{subsection.4.4}%
+\contentsline {section}{\numberline {5}NP-dureza de la selección de participantes}{15}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Paso 1: problema de partida, Cobertura Máxima}{15}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Paso 2: construcción de la reducción $\varphi $}{15}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}La instancia construida es válida}{16}{subsubsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.3}Paso 3: la transformación es polinomial}{17}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Paso 4: la transformación conserva la respuesta}{17}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Paso 5: conclusión}{17}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.6}Ejemplo de la reducción}{18}{subsection.5.6}%
+\contentsline {paragraph}{Instancia con respuesta \emph {sí}.}{18}{subsection.5.6}%
+\contentsline {paragraph}{Submodularidad en números (nodo 2, $S_2=\{3,4\}$).}{18}{subsection.5.6}%
+\contentsline {paragraph}{Instancia con respuesta \emph {no}.}{18}{subsection.5.6}%
+\contentsline {section}{\numberline {6}Conclusiones}{19}{section.6}%
+\contentsline {paragraph}{Trabajo pendiente.}{19}{section.6}%
+\contentsline {section}{\numberline {A}Código de los algoritmos}{20}{appendix.A}%

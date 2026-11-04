@@ -1,0 +1,213 @@
+\section{NP-dureza de la selección de participantes}\label{sec:reduccion}
+
+La demostración sigue cinco pasos:
+\begin{enumerate}
+  \item Escoger un problema $A$ conocido como NP-difícil: \MC.
+  \item Construir una transformación $\varphi$ desde \MC{} hacia el problema $B=$ \SEL.
+  \item Demostrar que $\varphi$ se calcula en tiempo polinomial.
+  \item Demostrar que $\varphi$ conserva la respuesta: \emph{sí} en \MC{} $\iff$ \emph{sí} en \SEL.
+  \item Concluir que \SEL{} es NP-difícil.
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  caja/.style={draw,thick,rounded corners,align=center,minimum height=12mm,minimum width=33mm,font=\small},
+  flecha/.style={-{Stealth[length=3mm]},thick}]
+  \node[caja] (sc)  at (0,0)    {\SC\\ \footnotesize NP-completo (Karp)};
+  \node[caja] (mc)  at (5,0)    {\MC\\ \footnotesize problema $A$};
+  \node[caja,fill=institucionalclaro] (sel) at (10,0) {\SEL\\ \footnotesize problema $B$};
+  \draw[flecha] (sc) -- node[above,font=\footnotesize]{$\le_p$} node[below,font=\footnotesize]{Paso 1} (mc);
+  \draw[flecha] (mc) -- node[above,font=\footnotesize]{$\le_p$ vía $\varphi$} node[below,font=\footnotesize]{Pasos 2--4} (sel);
+\end{tikzpicture}
+\caption{Cadena de reducciones. La dificultad se hereda en la dirección de las flechas.}
+\end{figure}
+
+%% ---------------------------------------------------------------------
+\subsection{Paso 1: problema de partida, Cobertura Máxima}
+
+\begin{definicion}[\SC]
+\textbf{Entrada:} un universo finito $U$, una colección $\mathcal S=\{S_1,\dots,S_m\}$ con $S_j\subseteq U$, y un entero $k$. \textbf{Pregunta:} ¿existen $k$ conjuntos de $\mathcal S$ cuya unión es $U$?
+\end{definicion}
+
+\begin{definicion}[\MC]
+\textbf{Entrada:} $U$, $\mathcal S=\{S_1,\dots,S_m\}$, un entero $k$ y un umbral $t$. \textbf{Pregunta:} ¿existen $k$ conjuntos de $\mathcal S$ cuya unión tiene al menos $t$ elementos?
+\end{definicion}
+
+\begin{lema}\label{lem:mc}
+\MC{} es NP-completo.
+\end{lema}
+\begin{proof}
+\SC{} es NP-completo \parencite{karp1972,garey1979}. Se construye $\varphi_1(U,\mathcal S,k) = (U,\mathcal S,k,\,t=|U|)$, que solo agrega el número $|U|$ y toma tiempo lineal. Como toda unión de conjuntos de $\mathcal S$ está contenida en $U$, tiene a lo sumo $|U|$ elementos, y por lo tanto
+\[
+\Big|\bigcup_{\text{elegidos}} S_j\Big| \ge |U| \iff \bigcup_{\text{elegidos}} S_j = U .
+\]
+Las dos preguntas tienen la misma respuesta, así que $\SC\le_p\MC$ y, por el Teorema~\ref{teo:herramienta}, \MC{} es NP-difícil. Además $\MC\in\mathrm{NP}$: dados $k$ índices como certificado, la unión se calcula y se cuenta en tiempo polinomial.
+\end{proof}
+
+\textbf{Por qué se escoge \MC.} Su estructura coincide con la de nuestro problema: escoger $k$ elementos (conjuntos o nodos) para maximizar algo en lo que las contribuciones se solapan. Un elemento cubierto por dos conjuntos cuenta una sola vez, igual que la información redundante entre dos nodos.
+
+%% ---------------------------------------------------------------------
+\subsection{Paso 2: construcción de la reducción \texorpdfstring{$\varphi$}{phi}}
+
+Dada una instancia $I=(U,\mathcal S=\{S_1,\dots,S_m\},k,t)$ de \MC, se construye la instancia $\varphi(I)=(V,f,k',t')$ de \SEL.
+
+\textbf{Caso trivial $k\ge m$.} \SEL{} exige $k<N$. Si $k\ge m$, en \MC{} se pueden tomar todos los conjuntos y, por monotonía, (con a lo sumo $k$ conjuntos) la respuesta es \emph{sí} exactamente cuando $\big|\bigcup_{i=1}^m S_i\big|\ge t$, lo cual se calcula en tiempo $O(\|I\|)$. En ese caso $\varphi$ devuelve una instancia fija de \SEL{} con la misma respuesta (por ejemplo, $V=\{1,2\}$, $S_1=\{a\}$, $S_2=\emptyset$, $k'=1$ y $t'=1$ para \emph{sí}, o $t'=2$ para \emph{no}). En adelante se supone $k<m$:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{p{0.16\linewidth}p{0.27\linewidth}p{0.47\linewidth}}
+\toprule
+\rowcolor{uccielo} \textbf{Componente} & \textbf{Valor construido} & \textbf{Razón} \\
+\midrule
+Nodos & $V=\{1,\dots,m\}$, $N=m$ & Cada conjunto $S_i$ se convierte en el nodo $i$; escoger el nodo $i$ equivale a escoger $S_i$. \\
+Utilidad & $f(A)=\Big|\bigcup_{i\in A}S_i\Big|$ & La utilidad de un grupo es cuántos elementos distintos cubre: exactamente lo que \MC{} cuenta. \\
+Cupo & $k'=k$ & Se escogen tantos nodos como conjuntos. \\
+Umbral & $t'=t$ & La utilidad mínima pedida es la cobertura mínima pedida. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Interpretación en el proyecto.} $U$ son categorías (o regiones) de datos y $S_i$ son las categorías de las que el nodo $i$ tiene datos. La utilidad de entrenar con un grupo es cuántas categorías distintas aporta; una categoría que ya aportó otro nodo no suma de nuevo.
+
+\textbf{Importante:} $V$ son los nodos (lo que se \emph{escoge}) y $U$ son los elementos (lo que se \emph{cubre}).
+
+\begin{algorithm}[H]
+\caption{\textsc{Transformar}$(U,\ S_1,\dots,S_m,\ k,\ t)$}\label{alg:tau}
+$N\leftarrow m$\;
+\For{$i\leftarrow 1$ \KwTo $m$}{
+  $\textit{nodo}[i].\textit{conjunto}\leftarrow$ copia de $S_i$\;
+}
+\Return{$(N,\ \textit{nodo}[1..N],\ k,\ t)$} \tcp*{la descripción de $f$ son los conjuntos}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\caption{\textsc{Evaluar-}$f(A)$}\label{alg:evalf}
+$\textit{cubierto}[1..|U|]\leftarrow \textsc{falso}$; $\ \textit{cont}\leftarrow 0$\;
+\ForEach{$i\in A$}{
+  \ForEach{$e\in S_i$}{
+    \If{\textbf{no} $\textit{cubierto}[e]$}{
+      $\textit{cubierto}[e]\leftarrow\textsc{verdadero}$; $\ \textit{cont}\leftarrow\textit{cont}+1$ \tcp*{cada elemento cuenta una vez}
+    }
+  }
+}
+\Return{$\textit{cont}$}\;
+\end{algorithm}
+
+\subsubsection{La instancia construida es válida}
+
+Para que $\varphi(I)$ sea una instancia de \SEL, $f$ debe cumplir las condiciones de la formulación. Sea $C(A)=\bigcup_{i\in A}S_i$, de modo que $f(A)=|C(A)|$.
+
+\begin{lema}[Ganancia marginal de la cobertura]\label{lem:ganancia}
+Para $A\subseteq V$ y $j\notin A$: $\ \Delta_j(A) = |S_j\setminus C(A)|$.
+\end{lema}
+\begin{proof}
+$C(A\cup\{j\}) = C(A)\cup S_j$ es la unión disjunta de $C(A)$ y $S_j\setminus C(A)$. Por lo tanto $f(A\cup\{j\}) = |C(A)| + |S_j\setminus C(A)|$, y al restar $f(A)=|C(A)|$ queda el resultado. En palabras: $j$ aporta solo los elementos que todavía no estaban cubiertos.
+\end{proof}
+
+\begin{lema}\label{lem:valida}
+La función $f(A)=|C(A)|$ es normalizada, monótona y submodular.
+\end{lema}
+\begin{proof}
+\textbf{Normalizada:} $f(\emptyset)=|\emptyset|=0$.
+
+\textbf{Monótona:} por el Lema~\ref{lem:ganancia}, $\Delta_j(A)=|S_j\setminus C(A)|\ge 0$.
+
+\textbf{Submodular:} sean $A\subseteq B'\subseteq V$ y $j\notin B'$.
+\begin{enumerate}
+  \item $A\subseteq B'$ implica $C(A)\subseteq C(B')$, porque $B'$ contiene todos los nodos de $A$.
+  \item Entonces $S_j\setminus C(B')\subseteq S_j\setminus C(A)$: al quitar un conjunto más grande queda menos.
+  \item Por lo tanto $|S_j\setminus C(B')|\le|S_j\setminus C(A)|$.
+  \item Por el Lema~\ref{lem:ganancia}, esto es $\Delta_j(B')\le\Delta_j(A)$. \qedhere
+\end{enumerate}
+\end{proof}
+
+%% ---------------------------------------------------------------------
+\subsection{Paso 3: la transformación es polinomial}
+
+Sea $\|I\| = m + |U| + \sum_{i=1}^{m}|S_i|$ el tamaño de la instancia de \MC.
+
+\textbf{Costo de $\varphi$ (Algoritmo~\ref{alg:tau}).} La línea 1 cuesta $c_1$; el ciclo copia cada $S_i$ con costo $c_2|S_i|+c_3$:
+\[
+T_\varphi(I) = c_1 + \sum_{i=1}^{m}\big(c_2|S_i| + c_3\big) = c_1 + c_3\,m + c_2\sum_{i=1}^{m}|S_i| \;\in\; \Theta\Big(m + \sum_{i}|S_i|\Big)\subseteq O(\|I\|).
+\]
+
+\textbf{Costo de evaluar $f$ (Algoritmo~\ref{alg:evalf}).} La inicialización cuesta $\Theta(|U|)$ y el doble ciclo hace $\sum_{i\in A}|S_i|$ iteraciones de costo constante:
+\[
+\tau(A) \in \Theta\Big(|U| + \sum_{i\in A}|S_i|\Big)\subseteq O(\|I\|).
+\]
+
+Ambos costos son \textbf{lineales} en el tamaño de la entrada; en particular, polinomiales. Además, el tamaño de la salida es del mismo orden que el de la entrada, de modo que la instancia construida no crece de forma exponencial.
+
+%% ---------------------------------------------------------------------
+\subsection{Paso 4: la transformación conserva la respuesta}
+
+\begin{teorema}\label{teo:conserva}
+$I$ tiene respuesta \emph{sí} en \MC{} $\iff$ $\varphi(I)$ tiene respuesta \emph{sí} en \SEL.
+\end{teorema}
+\begin{proof}
+\textbf{($\Rightarrow$)} Supóngase que existen índices $i_1,\dots,i_k$ con $\big|S_{i_1}\cup\dots\cup S_{i_k}\big|\ge t$. Sea $A=\{i_1,\dots,i_k\}$. Entonces $|A|= k$ y
+\[
+f(A) = \big|S_{i_1}\cup\dots\cup S_{i_k}\big| \ge t,
+\]
+así que $\varphi(I)$ tiene respuesta \emph{sí}.
+
+\textbf{($\Leftarrow$)} Supóngase que existe $A\subseteq V$ con $|A|\le k$ y $f(A)\ge t$. Los conjuntos $\{S_i : i\in A\}$ son a lo sumo $k$ y su unión tiene $f(A)\ge t$ elementos. Si son menos de $k$, se agregan conjuntos cualesquiera hasta completar $k$ (es posible porque $k<m$); por la monotonía (Lema~\ref{lem:valida}), la unión no disminuye y sigue teniendo al menos $t$ elementos. Por lo tanto $I$ tiene respuesta \emph{sí}.
+\end{proof}
+
+\begin{observacion}[Por qué las dos direcciones]
+Con solo ($\Rightarrow$), una transformación que siempre produjera instancias con respuesta \emph{sí} pasaría la prueba sin ser una reducción. La dirección ($\Leftarrow$) garantiza que $\varphi$ no crea soluciones que no existían en la instancia original.
+\end{observacion}
+
+%% ---------------------------------------------------------------------
+\subsection{Paso 5: conclusión}
+
+\begin{teorema}\label{teo:nphard}
+\SEL{} es NP-difícil; su versión de decisión es NP-completa.
+\end{teorema}
+\begin{proof}
+Por el Lema~\ref{lem:mc}, \MC{} es NP-difícil. Por los Pasos 2--4, $\varphi$ es una reducción polinomial válida, es decir, $\MC\le_p\SEL$. Por el Teorema~\ref{teo:herramienta}, \SEL{} es NP-difícil. Además, \SEL{} está en NP: un grupo $A$ sirve como certificado, y verificar $|A|\le k$ y $f(A)\ge t$ toma tiempo polinomial porque $f$ es evaluable en tiempo polinomial.
+\end{proof}
+
+\begin{corolario}
+La versión de optimización de \SEL{}, y por la Sección~\ref{sec:cualB} el problema completo \RED, son NP-difíciles. Si existiera un algoritmo polinomial que encontrara un óptimo $A^*$, bastaría con comparar $f(A^*)\ge t$ para decidir \SEL{} en tiempo polinomial, lo que implicaría $\mathrm{P}=\mathrm{NP}$.
+\end{corolario}
+
+\textbf{Consecuencia.} A diferencia de la Parte 1, que se resuelve en $\Theta(N+B\log N)$, para la selección de participantes no se espera un algoritmo exacto polinomial: el exacto conocido hace $\Theta\big(\binom{N}{k}\big)$ evaluaciones, que es exponencial para $k\approx N/2$ (Lema~\ref{lem:binom}). Por eso se usa el voraz de la Sección~\ref{sec:voraz}, con costo $\Theta(Nk)$ y garantía $(1-1/e)$.
+
+%% ---------------------------------------------------------------------
+\subsection{Ejemplo de la reducción}
+
+\paragraph{Instancia con respuesta \emph{sí}.} $U=\{1,2,3,4,5,6\}$, $S_1=\{1,2,3\}$, $S_2=\{3,4\}$, $S_3=\{4,5,6\}$, $S_4=\{1,4\}$, $k=2$, $t=6$. Al aplicar $\varphi$: $V=\{1,2,3,4\}$, $f(A)=|C(A)|$, $k=2$, $t=6$.
+
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+\rowcolor{uccielo} $A$ & $C(A)$ & $f(A)$ & ¿$f(A)\ge 6$? \\
+\midrule
+$\{1,2\}$ & $\{1,2,3,4\}$ & 4 & no \\
+$\{1,3\}$ & $\{1,2,3,4,5,6\}$ & \textbf{6} & \textbf{sí} \\
+$\{1,4\}$ & $\{1,2,3,4\}$ & 4 & no \\
+$\{2,3\}$ & $\{3,4,5,6\}$ & 4 & no \\
+$\{2,4\}$ & $\{1,3,4\}$ & 3 & no \\
+$\{3,4\}$ & $\{1,4,5,6\}$ & 4 & no \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Ambos problemas responden \emph{sí}, con el testigo $A=\{1,3\}$ ($S_1,S_3$).
+
+\paragraph{Submodularidad en números (nodo 2, $S_2=\{3,4\}$).}
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+\rowcolor{uccielo} $A$ & $C(A)$ & $S_2\setminus C(A)$ & $\Delta_2(A)$ \\
+\midrule
+$\emptyset$ & $\emptyset$ & $\{3,4\}$ & 2 \\
+$\{1\}$ & $\{1,2,3\}$ & $\{4\}$ & 1 \\
+$\{1,3\}$ & $\{1,\dots,6\}$ & $\emptyset$ & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Instancia con respuesta \emph{no}.} Si se cambia $S_3=\{4,5\}$, el elemento $6$ no aparece en ningún conjunto, así que ninguna elección cubre los $6$ elementos: \MC{} responde \emph{no}, y en la instancia construida ningún par alcanza $f(A)=6$, así que \SEL{} también responde \emph{no}.

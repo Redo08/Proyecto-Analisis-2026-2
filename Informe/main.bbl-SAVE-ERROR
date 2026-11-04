@@ -1,0 +1,282 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global/global}
+    \entry{cormen2009}{book}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=835b8c52757d98c15859b416316d9820}{%
+           family={Cormen},
+           familyi={C\bibinitperiod},
+           given={Thomas\bibnamedelima H.},
+           giveni={T\bibinitperiod\bibinitdelim H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a389dea91a76366c4b4af5f52a928a76}{%
+           family={Leiserson},
+           familyi={L\bibinitperiod},
+           given={Charles\bibnamedelima E.},
+           giveni={C\bibinitperiod\bibinitdelim E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3a964821f97ee17f8bb285bc61c52899}{%
+           family={Rivest},
+           familyi={R\bibinitperiod},
+           given={Ronald\bibnamedelima L.},
+           giveni={R\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bc78426660400760f77758aec45e71a8}{%
+           family={Stein},
+           familyi={S\bibinitperiod},
+           given={Clifford},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Cambridge, MA}%
+      }
+      \list{publisher}{1}{%
+        {MIT Press}%
+      }
+      \strng{namehash}{c251cdfd036d9474565c517e73c19c5d}
+      \strng{fullhash}{10f004e08c7c03d98be0da1231a869ce}
+      \strng{fullhashraw}{10f004e08c7c03d98be0da1231a869ce}
+      \strng{bibnamehash}{c251cdfd036d9474565c517e73c19c5d}
+      \strng{authorbibnamehash}{c251cdfd036d9474565c517e73c19c5d}
+      \strng{authornamehash}{c251cdfd036d9474565c517e73c19c5d}
+      \strng{authorfullhash}{10f004e08c7c03d98be0da1231a869ce}
+      \strng{authorfullhashraw}{10f004e08c7c03d98be0da1231a869ce}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{3}
+      \field{title}{Introduction to Algorithms}
+      \field{year}{2009}
+    \endentry
+    \entry{feige1998}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=b1684193b9de8503418fa549b5fe487c}{%
+           family={Feige},
+           familyi={F\bibinitperiod},
+           given={Uriel},
+           giveni={U\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{b1684193b9de8503418fa549b5fe487c}
+      \strng{fullhash}{b1684193b9de8503418fa549b5fe487c}
+      \strng{fullhashraw}{b1684193b9de8503418fa549b5fe487c}
+      \strng{bibnamehash}{b1684193b9de8503418fa549b5fe487c}
+      \strng{authorbibnamehash}{b1684193b9de8503418fa549b5fe487c}
+      \strng{authornamehash}{b1684193b9de8503418fa549b5fe487c}
+      \strng{authorfullhash}{b1684193b9de8503418fa549b5fe487c}
+      \strng{authorfullhashraw}{b1684193b9de8503418fa549b5fe487c}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of the ACM}
+      \field{number}{4}
+      \field{title}{A Threshold of $\ln n$ for Approximating Set Cover}
+      \field{volume}{45}
+      \field{year}{1998}
+      \field{pages}{634\bibrangedash 652}
+      \range{pages}{19}
+    \endentry
+    \entry{garey1979}{book}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=3d981c215c9c575d31bcca98c6d6c69d}{%
+           family={Garey},
+           familyi={G\bibinitperiod},
+           given={Michael\bibnamedelima R.},
+           giveni={M\bibinitperiod\bibinitdelim R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8f805225d8e433c29a18a566d1f6acc6}{%
+           family={Johnson},
+           familyi={J\bibinitperiod},
+           given={David\bibnamedelima S.},
+           giveni={D\bibinitperiod\bibinitdelim S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {San Francisco}%
+      }
+      \list{publisher}{1}{%
+        {W. H. Freeman}%
+      }
+      \strng{namehash}{d186cd4f1f5ca75183b09d5af68f9e7c}
+      \strng{fullhash}{d186cd4f1f5ca75183b09d5af68f9e7c}
+      \strng{fullhashraw}{d186cd4f1f5ca75183b09d5af68f9e7c}
+      \strng{bibnamehash}{d186cd4f1f5ca75183b09d5af68f9e7c}
+      \strng{authorbibnamehash}{d186cd4f1f5ca75183b09d5af68f9e7c}
+      \strng{authornamehash}{d186cd4f1f5ca75183b09d5af68f9e7c}
+      \strng{authorfullhash}{d186cd4f1f5ca75183b09d5af68f9e7c}
+      \strng{authorfullhashraw}{d186cd4f1f5ca75183b09d5af68f9e7c}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Computers and Intractability: A Guide to the Theory of {NP}-Completeness}
+      \field{year}{1979}
+    \endentry
+    \entry{karp1972}{incollection}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=5290385c419686f6312edeb3578dc9cf}{%
+           family={Karp},
+           familyi={K\bibinitperiod},
+           given={Richard\bibnamedelima M.},
+           giveni={R\bibinitperiod\bibinitdelim M\bibinitperiod},
+           givenun=0}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=61845d8713df720183097da97764018e}{%
+           family={Miller},
+           familyi={M\bibinitperiod},
+           given={Raymond\bibnamedelima E.},
+           giveni={R\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=0c49a2a69eb15e588235d478d36d70ea}{%
+           family={Thatcher},
+           familyi={T\bibinitperiod},
+           given={James\bibnamedelima W.},
+           giveni={J\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York}%
+      }
+      \list{publisher}{1}{%
+        {Plenum Press}%
+      }
+      \strng{namehash}{5290385c419686f6312edeb3578dc9cf}
+      \strng{fullhash}{5290385c419686f6312edeb3578dc9cf}
+      \strng{fullhashraw}{5290385c419686f6312edeb3578dc9cf}
+      \strng{bibnamehash}{5290385c419686f6312edeb3578dc9cf}
+      \strng{authorbibnamehash}{5290385c419686f6312edeb3578dc9cf}
+      \strng{authornamehash}{5290385c419686f6312edeb3578dc9cf}
+      \strng{authorfullhash}{5290385c419686f6312edeb3578dc9cf}
+      \strng{authorfullhashraw}{5290385c419686f6312edeb3578dc9cf}
+      \strng{editorbibnamehash}{3aab04d268ea6e8583a3d7d8e964386b}
+      \strng{editornamehash}{3aab04d268ea6e8583a3d7d8e964386b}
+      \strng{editorfullhash}{3aab04d268ea6e8583a3d7d8e964386b}
+      \strng{editorfullhashraw}{3aab04d268ea6e8583a3d7d8e964386b}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Complexity of Computer Computations}
+      \field{title}{Reducibility Among Combinatorial Problems}
+      \field{year}{1972}
+      \field{pages}{85\bibrangedash 103}
+      \range{pages}{19}
+    \endentry
+    \entry{khuller1999}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=7efac60c3432923d4d1f099fa42575eb}{%
+           family={Khuller},
+           familyi={K\bibinitperiod},
+           given={Samir},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3d377605b6cbdd129b2828a3387b28ff}{%
+           family={Moss},
+           familyi={M\bibinitperiod},
+           given={Anna},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8d070a13e474d91cf1ca09ba94681f3a}{%
+           family={Naor},
+           familyi={N\bibinitperiod},
+           given={Joseph},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{a23896af064d14503899a65b139c6c05}
+      \strng{fullhash}{a23896af064d14503899a65b139c6c05}
+      \strng{fullhashraw}{a23896af064d14503899a65b139c6c05}
+      \strng{bibnamehash}{a23896af064d14503899a65b139c6c05}
+      \strng{authorbibnamehash}{a23896af064d14503899a65b139c6c05}
+      \strng{authornamehash}{a23896af064d14503899a65b139c6c05}
+      \strng{authorfullhash}{a23896af064d14503899a65b139c6c05}
+      \strng{authorfullhashraw}{a23896af064d14503899a65b139c6c05}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Information Processing Letters}
+      \field{number}{1}
+      \field{title}{The Budgeted Maximum Coverage Problem}
+      \field{volume}{70}
+      \field{year}{1999}
+      \field{pages}{39\bibrangedash 45}
+      \range{pages}{7}
+    \endentry
+    \entry{nemhauser1978}{article}{}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=151b280703f96e0cfa3f018c0c2ae0f9}{%
+           family={Nemhauser},
+           familyi={N\bibinitperiod},
+           given={George\bibnamedelima L.},
+           giveni={G\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=85dba919fdceaad20b2b4009570310cc}{%
+           family={Wolsey},
+           familyi={W\bibinitperiod},
+           given={Laurence\bibnamedelima A.},
+           giveni={L\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=2d06e0a44c0de8061b5113e0d97f9186}{%
+           family={Fisher},
+           familyi={F\bibinitperiod},
+           given={Marshall\bibnamedelima L.},
+           giveni={M\bibinitperiod\bibinitdelim L\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{5ca9f402fc4eb748dacaf7d48b71c186}
+      \strng{fullhash}{5ca9f402fc4eb748dacaf7d48b71c186}
+      \strng{fullhashraw}{5ca9f402fc4eb748dacaf7d48b71c186}
+      \strng{bibnamehash}{5ca9f402fc4eb748dacaf7d48b71c186}
+      \strng{authorbibnamehash}{5ca9f402fc4eb748dacaf7d48b71c186}
+      \strng{authornamehash}{5ca9f402fc4eb748dacaf7d48b71c186}
+      \strng{authorfullhash}{5ca9f402fc4eb748dacaf7d48b71c186}
+      \strng{authorfullhashraw}{5ca9f402fc4eb748dacaf7d48b71c186}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Mathematical Programming}
+      \field{number}{1}
+      \field{title}{An Analysis of Approximations for Maximizing Submodular Set Functions---{I}}
+      \field{volume}{14}
+      \field{year}{1978}
+      \field{pages}{265\bibrangedash 294}
+      \range{pages}{30}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

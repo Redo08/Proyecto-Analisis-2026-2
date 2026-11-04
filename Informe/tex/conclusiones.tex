@@ -1,0 +1,11 @@
+\section{Conclusiones}
+
+\begin{itemize}
+  \item El \textbf{reparto del presupuesto} entre nodos con utilidades cóncavas se resuelve de forma exacta con un algoritmo voraz, cuya optimalidad se demuestra por intercambio. Su función de eficiencia es $\Theta(N+B\log N)$ en el peor caso y $\Theta(N+B)$ en el mejor caso. Es polinomial en $N$ y en el valor de $B$, es decir, pseudo-polinomial; el método del umbral, y la nivelación en el caso continuo, eliminan la dependencia en $B$.
+  \item La \textbf{selección de participantes} con utilidad submodular es \textbf{NP-difícil}. Se demostró con la reducción $\MC\le_p\SEL$: cada conjunto se convierte en un nodo y la utilidad es el tamaño de la unión; la transformación es lineal y conserva la respuesta en ambas direcciones.
+  \item El algoritmo exacto de la selección realiza $\Theta\big(\binom{N}{k}\big)$ evaluaciones de $f$, con $\tau=O(k\,s)$ cada una; sin cupo, su recurrencia $T(n)=2T(n-1)+c$ da $\Theta(2^N)$. Para $k=\floor{N/2}$ el costo es $\Omega(2^N/N)$, exponencial.
+  \item El algoritmo voraz de selección cuesta $\Theta(N\,k)$ evaluaciones, con $\tau=O(s)$ cada una, y garantiza al menos $(1-1/e)\approx 63\%$ del óptimo \parencite{nemhauser1978}; esta garantía es la mejor alcanzable en tiempo polinomial a menos que $\mathrm{P}=\mathrm{NP}$ \parencite{feige1998}.
+  \item Como la selección es un caso particular del problema completo del proyecto, la dificultad del proyecto se concentra en elegir los participantes, no en repartir el presupuesto.
+\end{itemize}
+
+\paragraph{Trabajo pendiente.} Este informe cubre la solución base de las dos partes. Las variantes obligatorias (costos de participación, repetición en $T$ rondas con fallas y nodos relacionados entre sí) se desarrollarán en la siguiente entrega. Para la variante con costos, la cota del voraz cambia y debe citarse en su versión para cobertura con presupuesto \parencite{khuller1999}.

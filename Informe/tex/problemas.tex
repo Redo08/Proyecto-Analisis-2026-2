@@ -1,0 +1,109 @@
+\section{Formulación matemática de los problemas}
+
+\subsection{Problema 1: reparto óptimo del presupuesto (\REP)}
+
+\begin{definicion}[Reparto óptimo del presupuesto]\label{def:rep}
+\textbf{Entrada:} $N$ nodos ya seleccionados para la ronda; para cada nodo $i\in\{1,\dots,N\}$, \textbf{su} función de utilidad $u_i:\N\to\R$, creciente y cóncava; y un presupuesto total $B\in\N$, medido en unidades enteras.
+
+\textbf{Salida:} un reparto $(x_1,\dots,x_N)\in\N^N$, donde $x_i$ es el número de unidades asignadas al nodo $i$.
+
+\textbf{Objetivo:}
+\[
+\max_{x_1,\dots,x_N}\ \sum_{i=1}^{N} u_i(x_i)
+\quad\text{sujeto a}\quad \sum_{i=1}^{N} x_i \le B,\qquad x_i\in\N .
+\]
+\end{definicion}
+
+\paragraph{Ganancia marginal.} La ganancia de dar la unidad número $x+1$ al nodo $i$ es
+\[
+g_i(x) = u_i(x+1) - u_i(x), \qquad x = 0,1,2,\dots
+\]
+\textbf{Creciente} significa $g_i(x)\ge 0$. \textbf{Cóncava} (en el caso discreto) significa que las ganancias no aumentan: $g_i(0) \ge g_i(1) \ge g_i(2) \ge \cdots$. Cada unidad adicional aporta igual o menos que la anterior.
+
+\begin{observacion}[$\le B$ o $=B$]
+Como cada $u_i$ es creciente, gastar una unidad sobrante nunca reduce la utilidad. Por lo tanto siempre existe un óptimo que usa exactamente $B$ unidades, y el algoritmo de la Sección~\ref{sec:p1} las reparte todas.
+\end{observacion}
+
+\paragraph{Tamaño de la entrada y por qué es la medida adecuada.} El problema crece con dos parámetros:
+\begin{itemize}
+  \item $N$, el número de nodos: cada nodo agrega una función $u_i$ a la entrada y un candidato más a cada decisión.
+  \item $B$, el número de unidades de presupuesto: el voraz toma una decisión por unidad, así que $B$ es el número de pasos.
+\end{itemize}
+Por eso la función de eficiencia es de dos variables, $T(N,B)$. Se supone que evaluar $u_i(x)$ cuesta tiempo constante, como en la utilidad implementada, $u_i(x)=w_i\ln(1+x)$, donde $w_i>0$ mide la cantidad o calidad de los datos del nodo $i$. Con esta convención, la entrada se describe con $N$ números $w_i$ y el número $B$.
+
+\begin{observacion}[Pseudo-polinomialidad]
+$B$ se escribe con solo $\lceil\log_2(B+1)\rceil$ bits, pero el voraz hace $B$ pasos. Su costo es polinomial en el \emph{valor} de $B$ y exponencial en la \emph{longitud} de su representación; es decir, es \textbf{pseudo-polinomial}, el mismo fenómeno de la mochila 0/1. La Sección~\ref{sec:pseudo} lo discute y muestra cómo eliminar la dependencia en $B$.
+\end{observacion}
+
+\subsection{Problema 2: selección de participantes (\SEL)}
+
+\begin{definicion}[Selección de participantes]\label{def:sel}
+  
+\textbf{Entrada:} un conjunto de nodos candidatos $V=\{1,\dots,N\}$; una función de utilidad conjunta $f:\pot{V}\to\R_{\ge 0}$, que asigna a cada grupo de nodos $A\subseteq V$ su utilidad $f(A)$; y un cupo $k\in\N$ con $k<N$.
+
+\textbf{Salida:} un grupo $A\subseteq V$ con $|A|= k$.
+
+\textbf{Objetivo:}
+\[
+\max_{A\subseteq V}\ f(A) \quad\text{sujeto a}\quad |A|\le k .
+\]
+\end{definicion}
+
+Como $f$ es monótona, siempre existe un óptimo con $|A|=k$, de modo que pedir $|A|\le k$ o $|A|=k$ da el mismo valor óptimo.
+
+\paragraph{Propiedades de $f$.} Para $A\subseteq V$ y $j\notin A$ se define la ganancia marginal
+\[
+\Delta_j(A) = f(A\cup\{j\}) - f(A),
+\]
+es decir, lo que aporta el nodo $j$ al grupo $A$. Se exige que $f$ sea:
+\begin{enumerate}
+  \item \textbf{Normalizada:} $f(\emptyset)=0$.
+  \item \textbf{Monótona:} $A\subseteq B' \Rightarrow f(A)\le f(B')$; equivalentemente, $\Delta_j(A)\ge 0$.
+  \item \textbf{Submodular:} para todo $A\subseteq B'\subseteq V$ y $j\notin B'$,
+  \[
+  \Delta_j(A) \;\ge\; \Delta_j(B').
+  \]
+  Agregar un nodo a un grupo pequeño aporta al menos lo que aporta agregarlo a un grupo más grande (rendimientos decrecientes). Se usa $B'$, y no $B$, para no confundir este grupo con el presupuesto.
+  \item \textbf{Evaluable en tiempo polinomial:} $f$ se da mediante una descripción compacta que permite calcular $f(A)$ en tiempo polinomial. Se denota $\tau$ el costo de una evaluación.
+\end{enumerate}
+
+\begin{observacion}[Por qué la condición 4]
+El dominio $\pot{V}$ tiene $2^N$ elementos (Lema~\ref{lem:potencia}). Si $f$ se diera como una tabla con todos sus valores, la entrada tendría tamaño exponencial en $N$, y recorrerla parecería ``lineal'' en el tamaño de la entrada, ocultando la dificultad real. Por ello $f$ se describe de forma compacta.
+\end{observacion}
+
+\paragraph{Utilidad implementada.} En la implementación se usa la utilidad de \textbf{cobertura}: hay un universo $U$ de categorías de datos, el nodo $j$ tiene datos de las categorías $S_j\subseteq U$, y
+\[
+f(A)=\Big|\bigcup_{j\in A}S_j\Big| .
+\]
+Esta $f$ cumple las condiciones 1--4 (Lema~\ref{lem:valida}). Su descripción compacta son los conjuntos $S_j$.
+
+\paragraph{Tamaño de la entrada y por qué es la medida adecuada.}
+\begin{itemize}
+  \item $N$, el número de candidatos: determina cuántos grupos existen ($2^N$, o $\binom{N}{k}$ con cupo) y cuántos candidatos revisa el voraz en cada paso.
+  \item $k$, el cupo: determina cuántos pasos hace el voraz y el tamaño de los grupos que revisa el exacto.
+\end{itemize}
+El costo de leer la descripción de $f$ queda dentro de $\tau$. Por eso las funciones de eficiencia se expresan como $T(N,k)$ en número de evaluaciones de $f$, y el tiempo total como $T(N,k)\cdot\tau$. Para la cobertura, con $s=\max_j|S_j|$, la Sección~\ref{sec:voraz} precisa $\tau$: $O(s)$ en el voraz y $O(k\,s)$ en el exacto.
+
+\subsection{Versiones de decisión}
+
+\begin{center}
+\begin{tabular}{p{0.2\linewidth}p{0.72\linewidth}}
+\toprule
+\rowcolor{uccielo} \textbf{Problema} & \textbf{Pregunta (sí/no)} \\
+\midrule
+\REP & Dados $u_1,\dots,u_N$, $B$ y un umbral $t$: ¿existe un reparto con $\sum_i x_i\le B$ y $\sum_i u_i(x_i)\ge t$? \\
+\SEL & Dados $V$, $f$, $k$ y un umbral $t$: ¿existe $A\subseteq V$ con $|A|\le k$ y $f(A)\ge t$? \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Qué problema es el ``B'' de la reducción}\label{sec:cualB}
+
+El proyecto completo (\RED) combina las dos decisiones: elegir el grupo $A$ con $|A|\le k$ y repartir $B$ entre sus nodos. Las dos partes tienen dificultades muy distintas:
+
+\begin{itemize}
+  \item \REP{} está en P (Sección~\ref{sec:p1}). Si se lograra reducir un problema NP-difícil hacia \REP, se tendría un algoritmo polinomial para un problema NP-difícil, lo que implicaría $\mathrm{P}=\mathrm{NP}$. Por lo tanto, \textbf{la reducción no puede ir hacia la Parte 1}.
+  \item La dificultad del proyecto está en la \textbf{selección}. La reducción se construye hacia \SEL{} (Sección~\ref{sec:reduccion}).
+\end{itemize}
+
+Como \SEL{} es un caso particular de \RED{} (tomando utilidades que no dependen del presupuesto, por ejemplo con $B=0$), cualquier algoritmo para \RED{} resuelve \SEL. En consecuencia, la NP-dureza de \SEL{} se traslada al problema completo del proyecto.

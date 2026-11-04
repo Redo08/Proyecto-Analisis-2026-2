@@ -1,0 +1,292 @@
+\section{Algoritmos y funciones de eficiencia}
+
+\subsection{Parte 1: algoritmo voraz con montículo}\label{sec:p1}
+
+\subsubsection{Algoritmo}
+
+La idea es entregar las $B$ unidades una por una, cada vez al nodo cuya \emph{siguiente} unidad aporta más. Cada nodo $i$ tiene \textbf{una} función de utilidad $u_i$ (son $N$ funciones en total, una por nodo, porque cada nodo tiene datos distintos). La ganancia de la unidad número $x+1$ del nodo $i$ se obtiene con una resta,
+\[
+g_i(x) = u_i(x+1) - u_i(x),
+\]
+y se calcula \textbf{solo cuando se necesita}, no se construye una tabla de $N\times B$ ganancias. Un montículo de máximos guarda, para cada nodo, la ganancia de su próxima unidad.
+
+\begin{algorithm}[H]
+\caption{\textsc{RepartoVoraz}$(N,\ u,\ B)$}\label{alg:reparto}
+\KwIn{$N$ nodos; para cada nodo $i$, \textbf{su} función de utilidad $u_i$ (cóncava y creciente); presupuesto $B\ge 1$}
+\KwOut{unidades asignadas a cada nodo, $x_1,\dots,x_N$, con $\sum_i x_i = B$}
+\lFor(\tcp*[f]{para cada nodo}){$i\leftarrow 1$ \KwTo $N$}{$x_i \leftarrow 0$ \tcp*[f]{el nodo $i$ empieza sin presupuesto}}
+$H \leftarrow$ lista vacía\;
+\lFor{$i\leftarrow 1$ \KwTo $N$}{agregar $\big(g_i(0),\, i\big)$ a $H$ \tcp*[f]{1.ª unidad del nodo $i$, con su $u_i$}}
+\textsc{Construir-Montículo-Max}$(H)$ \tcp*{$O(N)$}
+\For{$b\leftarrow 1$ \KwTo $B$}{
+  $(g,\,i) \leftarrow$ \textsc{Extraer-Máximo}$(H)$ \tcp*{nodo con mayor ganancia, $O(\log N)$}
+  $x_i \leftarrow x_i + 1$ \tcp*{se le da una unidad}
+  \textsc{Insertar}$\big(H,\ (g_i(x_i),\, i)\big)$ \tcp*{solo la siguiente ganancia de $i$, $O(\log N)$}
+}
+\Return{$(x_1,\dots,x_N)$}\;
+\end{algorithm}
+
+\paragraph{Correspondencia con la implementación.}
+Cada línea del pseudocódigo corresponde a una instrucción de la función \texttt{reparto\_voraz}, que está en el archivo \texttt{code/algoritmos.py}:
+
+\begin{center}
+\begin{tabular}{cl}
+\toprule
+\rowcolor{uccielo} \textbf{Línea} & \textbf{Python} \\
+\midrule
+1 & \texttt{x = [0] * N} \\
+2--3 & \texttt{H = [(-g(i, 0), i) for i in range(N)]} \\
+4 & \texttt{heapq.heapify(H)} \\
+5 & \texttt{for \_ in range(B):} \\
+6 & \texttt{\_, i = heapq.heappop(H)} \\
+7 & \texttt{x[i] += 1} \\
+8 & \texttt{heapq.heappush(H, (-g(i, x[i]), i))} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Como \texttt{heapq} es un montículo de \emph{mínimos}, las ganancias se guardan con signo negativo: la mayor ganancia queda como el número más pequeño y sale primero.
+
+\subsubsection{Optimalidad (argumento de intercambio)}
+
+\begin{teorema}\label{teo:optimo}
+El reparto $x^g$ producido por el Algoritmo~\ref{alg:reparto} es óptimo.
+\end{teorema}
+\begin{proof}
+\textbf{Paso 1: la utilidad se escribe como suma de ganancias.} Para cualquier reparto $x$,
+\[
+\sum_{i=1}^N u_i(x_i) \;=\; \sum_{i=1}^N u_i(0) \;+\; \sum_{i=1}^{N}\sum_{y=0}^{x_i-1} g_i(y),
+\]
+por suma telescópica. El primer término no depende del reparto, así que maximizar la utilidad equivale a maximizar la suma de las $B$ ganancias marginales usadas.
+
+\textbf{Paso 2: el voraz toma las $B$ mayores ganancias.} En cada iteración el montículo contiene la próxima ganancia de cada nodo, y por concavidad esa es la mayor ganancia aún disponible de ese nodo. Por lo tanto el voraz toma, en cada paso, la mayor ganancia disponible entre todas. Sea $\lambda$ la menor ganancia que tomó el voraz. Entonces toda ganancia tomada es $\ge\lambda$, y toda ganancia no tomada es $\le\lambda$.
+
+\textbf{Paso 3: intercambio.} Sea $x^*$ un reparto óptimo con $x^*\ne x^g$. Por la observación que sigue a la Definición~\ref{def:rep}, se puede tomar $x^*$ con $\sum_i x^*_i=B$, igual que el voraz. Como ambos suman $B$, existen nodos $i$ y $j$ con $x^*_i > x^g_i$ y $x^*_j < x^g_j$. Se construye $x'$ moviendo una unidad de $i$ a $j$ en $x^*$. El cambio en la utilidad es
+\[
+\underbrace{g_j(x^*_j)}_{\text{unidad que el voraz sí tomó}} \;-\; \underbrace{g_i(x^*_i-1)}_{\text{unidad que el voraz no tomó}} \;\ge\; \lambda - \lambda \;=\; 0,
+\]
+porque $x^*_j < x^g_j$ implica que el voraz tomó la unidad $x^*_j$ de $j$, y $x^*_i-1 \ge x^g_i$ implica que no tomó la unidad $x^*_i-1$ de $i$. Así $x'$ también es óptimo y está más cerca de $x^g$ (la distancia $\sum_i |x^*_i-x^g_i|$ baja en $2$).
+
+\textbf{Paso 4: conclusión.} Repitiendo el intercambio un número finito de veces se llega a $x^g$ sin disminuir la utilidad. Por lo tanto $x^g$ tiene utilidad igual a la del óptimo.
+\end{proof}
+
+\subsubsection{Función de eficiencia por conteo de operaciones}
+
+Sean $c_1,\dots,c_8>0$ constantes del modelo RAM (se supone que evaluar $u_i$, y por lo tanto $g_i$, cuesta tiempo constante). Un montículo binario con $N$ elementos tiene altura $h=\floor{\log_2 N}$.
+
+\begin{center}
+\begin{tabular}{clcc}
+\toprule
+\rowcolor{uccielo} \textbf{Línea} & \textbf{Operación} & \textbf{Costo por ejecución} & \textbf{Veces} \\
+\midrule
+1 & inicializar $x_i$ & $c_1$ & $N$ \\
+2 & crear la lista & $c_2$ & $1$ \\
+3 & calcular $g_i(0)$ y agregarla & $c_3$ & $N$ \\
+4 & construir montículo & $\le c_4 N$ (CLRS, cap.~6) & $1$ \\
+6 & extraer el máximo & entre $c_6$ y $c_6\,h$ & $B$ \\
+7 & incrementar $x_i$ & $c_7$ & $B$ \\
+8 & calcular $g_i(x_i)$ e insertar & entre $c_8$ y $c_8\,h$ & $B$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+La línea 5 (control del ciclo) se absorbe en las constantes de las líneas 6--8.
+
+\paragraph{Peor caso.} Al extraer y al insertar, el elemento recorre toda la altura del montículo ($h$ niveles):
+\[
+T_{\text{peor}}(N,B) = c_1N + c_2 + c_3N + c_4N + \sum_{b=1}^{B}\big(c_6\floor{\log_2 N} + c_7 + c_8\floor{\log_2 N}\big)
+\]
+\[
+= (c_1+c_3+c_4)\,N + c_2 + c_7\,B + (c_6+c_8)\,B\floor{\log_2 N}.
+\]
+Para $N\ge 2$ se cumple $\tfrac12\log_2 N \le \floor{\log_2N}\le\log_2N$, $c_2\le c_2N$ y $B\le B\log_2N$, de modo que con $c_{\min}=\min_i c_i$ y $c_{\max}=\max_i c_i$:
+\[
+\tfrac{c_{\min}}{2}\,\big(N + B\log_2 N\big) \;\le\; T_{\text{peor}}(N,B) \;\le\; 4\,c_{\max}\big(N + B\log_2 N\big).
+\]
+\resultado{$T_{\text{peor}}(N,B)\in\Theta(N + B\log N)$}
+
+\paragraph{Mejor caso.} Si los elementos se detienen tras una comparación al extraer y al insertar (por ejemplo, cuando todas las ganancias son iguales):
+\[
+T_{\text{mejor}}(N,B) = (c_1 + c_3 + c_4')\,N + c_2 + (c_6+c_7+c_8)\,B \;\in\; \Theta(N + B),
+\]
+donde $0<c_4'\le c_4$ es el costo por elemento de construir el montículo (la construcción siempre recorre los $N$ elementos).
+
+\paragraph{Cotas del algoritmo.} Siguiendo la Observación~\ref{obs:casos}:
+\[
+T(N,B)\in O(N + B\log N), \qquad T(N,B)\in\Omega(N + B).
+\]
+Cuando $B\ge N$ (caso usual, más unidades que nodos), $N + B\log N \in \Theta(B\log N)$, que coincide con la cota $O(B\log N)$. En todos los casos el algoritmo es polinomial en $N$ y en el \emph{valor} de $B$; la Sección~\ref{sec:pseudo} precisa qué significa esto.
+
+\subsubsection{Pseudo-polinomialidad y presupuesto continuo}\label{sec:pseudo}
+
+\paragraph{Por qué la cota es pseudo-polinomial.} El tamaño de la entrada en bits es del orden de $N$ (los parámetros $w_i$) más $\lceil\log_2(B+1)\rceil$ (el número $B$). El voraz hace $B$ iteraciones, y $B = 2^{\log_2 B}$: si se duplica el número de \emph{dígitos} de $B$, el tiempo se eleva al cuadrado. Por eso $O(N+B\log N)$ es polinomial en el \emph{valor} de $B$ pero exponencial en la \emph{longitud} de su representación, igual que la programación dinámica $O(nW)$ de la mochila 0/1. En la práctica es eficiente siempre que $B$ sea un número moderado (en el proyecto, las unidades de presupuesto de una ronda).
+
+\paragraph{Cómo quitar la dependencia en $B$ (método del umbral).} La prueba de optimalidad muestra que el voraz toma exactamente las ganancias mayores que un umbral $\lambda$. Para un $\lambda$ dado, el número de unidades del nodo $i$ con ganancia $\ge\lambda$ es
+\[
+c_i(\lambda)=\big|\{x\ge 0 : g_i(x)\ge\lambda\}\big|,
+\]
+y como $g_i$ es no creciente, $c_i(\lambda)$ se obtiene con búsqueda binaria sobre $x\in\{0,\dots,B\}$ en $O(\log B)$ evaluaciones. Con una segunda búsqueda binaria sobre $\lambda$ se encuentra el umbral para el que $\sum_i c_i(\lambda)$ alcanza $B$, y las unidades empatadas en $\lambda$ se reparten hasta completar $B$. Si las ganancias son enteras y acotadas por $G$, el costo es $O(N\log B\log G)$, polinomial en el número de bits de la entrada. Esto confirma que \REP{} está en P aun cuando $B$ es muy grande. Para los tamaños del proyecto se usa el voraz con montículo, que es más simple y es el que pide el enunciado.
+
+\paragraph{Presupuesto continuo (nivelación, \emph{water-filling}).} Si $x_i\in\R_{\ge0}$ y las $u_i$ son derivables, cóncavas y crecientes, el problema es convexo y las condiciones de optimalidad (KKT) dicen que existe $\lambda\ge 0$ con
+\[
+u_i'(x_i)=\lambda \ \text{ si } x_i>0, \qquad u_i'(0)\le\lambda \ \text{ si } x_i=0, \qquad \sum_i x_i = B .
+\]
+Es la versión continua del umbral: todos los nodos que reciben presupuesto terminan con la \emph{misma} ganancia marginal $\lambda$, como agua que se nivela. Para la utilidad implementada, $u_i(x)=w_i\ln(1+x)$, se tiene $u_i'(x)=w_i/(1+x)$ y por lo tanto
+\[
+x_i(\lambda)=\max\!\left(0,\ \frac{w_i}{\lambda}-1\right).
+\]
+Como $\sum_i x_i(\lambda)$ es decreciente en $\lambda$, el nivel se encuentra ordenando los $w_i$ y probando cuántos nodos quedan activos, en $O(N\log N)$, o con búsqueda binaria sobre $\lambda$ en $O(N\log(1/\varepsilon))$ para precisión $\varepsilon$. En el caso continuo el costo ya no depende de $B$, porque no hay unidades que entregar una por una.
+
+\subsection{Parte 2: algoritmo exacto (búsqueda exhaustiva)}\label{sec:exacto}
+
+Como \SEL{} es NP-difícil (Sección~\ref{sec:reduccion}), no se conoce un algoritmo exacto polinomial. El algoritmo exacto natural recorre el árbol de decisiones ``incluir / no incluir'' cada nodo.
+
+\begin{algorithm}[H]
+\caption{\textsc{SelecciónExacta}$(V, f, k)$}\label{alg:exacto}
+\SetKwFunction{FExacto}{Exacto}
+\SetKwProg{Fn}{función}{:}{fin}
+\KwIn{nodos $V=\{1,\dots,N\}$; utilidad $f$; cupo $k$}
+\KwOut{el mejor grupo $A^*$ con $|A^*|=k$ y su utilidad $v^*=f(A^*)$}
+\BlankLine
+\Fn{\FExacto{$i,\ A$}}{
+  \If(\tcp*[h]{caso 1: el cupo ya está lleno}){$|A| = k$}{
+    \Return{$\big(f(A),\ A\big)$}\;
+  }
+  $\textit{quedan} \leftarrow N - i + 1$ \tcp*{nodos que faltan por decidir}
+  $\textit{faltan} \leftarrow k - |A|$ \tcp*{lugares libres en el cupo}
+  \If(\tcp*[h]{caso 2: no alcanzan los nodos}){$\textit{quedan} < \textit{faltan}$}{
+    \Return{$(-\infty,\ \emptyset)$}\;
+  }
+  $(v_1, A_1) \leftarrow$ \FExacto{$i+1,\ A\cup\{i\}$} \tcp*{caso 3a: incluir el nodo $i$}
+  $(v_2, A_2) \leftarrow$ \FExacto{$i+1,\ A$} \tcp*{caso 3b: no incluir el nodo $i$}
+  \eIf{$v_1 \ge v_2$}{
+    \Return{$(v_1,\ A_1)$}\;
+  }{
+    \Return{$(v_2,\ A_2)$}\;
+  }
+}
+\BlankLine
+$(v^*, A^*) \leftarrow$ \FExacto{$1,\ \emptyset$} \tcp*{llamada inicial}
+\Return{$(v^*, A^*)$}\;
+\end{algorithm}
+
+\subsubsection{Recurrencia sin poda: \texorpdfstring{$\Theta(2^N)$}{Theta(2\^{}N)}}
+
+Si se elimina el cupo y se recorren todos los subconjuntos (la recursión llega siempre hasta $i>N$ y evalúa $f$ en cada hoja), cada llamada con $n$ nodos por decidir hace dos llamadas con $n-1$ y trabajo constante $c$:
+\[
+T(n) = 2\,T(n-1) + c, \qquad T(0) = \tau .
+\]
+Se resuelve por sustitución (desplegando):
+\begin{align*}
+T(n) &= 2T(n-1) + c \\
+     &= 2\big(2T(n-2)+c\big) + c = 2^2T(n-2) + c(2+1) \\
+     &= 2^3T(n-3) + c(2^2+2+1) \\
+     &\ \ \vdots \\
+     &= 2^jT(n-j) + c\sum_{l=0}^{j-1}2^l = 2^jT(n-j) + c\,(2^j-1).
+\end{align*}
+Con $j=n$: $T(n) = 2^n \tau + c\,(2^n - 1)$. Por lo tanto
+\resultado{$T(N) = (\tau + c)\,2^N - c \;\in\; \Theta\!\left(2^N\right)$ (con $\tau$ constante), o $\Theta(2^N \tau)$ en general.}
+
+\subsubsection{Recurrencia con cupo \texorpdfstring{$k$}{k}: \texorpdfstring{$\binom{N}{k}$}{C(N,k)} evaluaciones}
+
+Sea $L(n,r)$ el número de evaluaciones de $f$ (hojas) cuando quedan $n$ nodos por decidir y faltan $r$ por escoger. De las dos llamadas recursivas (líneas 8 y 9):
+\[
+L(n,r) = L(n-1,\,r-1) + L(n-1,\,r), \qquad L(n,0)=1,\qquad L(n,r)=0 \ \text{si } r>n .
+\]
+Es la recurrencia del triángulo de Pascal, cuya solución es $L(n,r)=\binom{n}{r}$ (por inducción, usando $\binom{n}{r}=\binom{n-1}{r-1}+\binom{n-1}{r}$). El algoritmo evalúa $f$ exactamente $\binom{N}{k}$ veces, y como cada llamada interna conduce a alguna hoja y la profundidad es a lo sumo $N$, hay a lo sumo $N\binom{N}{k}$ llamadas internas. Entonces
+\[
+T_{\text{exacto}}(N,k) \in \Omega\!\left(\binom{N}{k}\tau\right), \qquad T_{\text{exacto}}(N,k) \in O\!\left(\binom{N}{k}(N+\tau)\right),
+\]
+y el número de evaluaciones es exactamente $\binom{N}{k}$, es decir $\Theta\big(\binom{N}{k}\big)$. El algoritmo hace siempre el mismo recorrido, así que el mejor y el peor caso coinciden.
+
+\subsubsection{Por qué esto no es polinomial}
+
+\begin{lema}\label{lem:binom}
+$\displaystyle\binom{N}{\floor{N/2}} \;\ge\; \frac{2^N}{N+1}$.
+\end{lema}
+\begin{proof}
+Por el Lema~\ref{lem:potencia}, los $N+1$ números $\binom{N}{0},\dots,\binom{N}{N}$ suman $2^N$. El mayor de ellos es $\binom{N}{\floor{N/2}}$, y el mayor de $N+1$ números es al menos su promedio, $2^N/(N+1)$.
+\end{proof}
+
+Así, para $k=\floor{N/2}$ el algoritmo exacto hace $\Omega(2^N/N)$ evaluaciones: crece de forma \textbf{exponencial}. Para $k$ constante, $\binom{N}{k}\in\Theta(N^k)$, un polinomio cuyo grado crece con $k$; como $k$ es parte de la entrada, el algoritmo no es polinomial en general. Este comportamiento es consistente con la NP-dureza: no se espera que exista un algoritmo exacto polinomial.
+
+\begin{observacion}[Cota del algoritmo vs.\ cota del problema]
+Las cotas $O$, $\Omega$ y $\Theta$ anteriores son del \emph{algoritmo exacto}. La NP-dureza no demuestra una cota inferior $\Omega$ exponencial para \emph{todo} algoritmo posible; demuestra que un algoritmo polinomial implicaría $\mathrm{P}=\mathrm{NP}$.
+\end{observacion}
+
+\subsection{Parte 2: algoritmo voraz de aproximación}\label{sec:voraz}
+
+\begin{algorithm}[H]
+\caption{\textsc{SelecciónVoraz}$(V, f, k)$}\label{alg:voraz}
+\KwIn{nodos $V=\{1,\dots,N\}$, utilidad submodular monótona $f$, cupo $k$}
+\KwOut{grupo $A$ con $|A| = k$}
+$A \leftarrow \emptyset$; $\ f_A \leftarrow 0$ \tcp*{grupo vacío, utilidad $0$}
+\For(\tcp*[f]{una vuelta por cada lugar del cupo}){$r\leftarrow 1$ \KwTo $k$}{
+  $\textit{mejor}\leftarrow$ ninguno; $\ \textit{mejorDelta}\leftarrow -\infty$\;
+  \For{$j\leftarrow 1$ \KwTo $N$}{
+    \lIf{$j\in A$}{\textbf{continuar} \tcp*[f]{ya está en el grupo}}
+    $\delta \leftarrow f(A\cup\{j\}) - f_A$ \tcp*{$\Delta_j(A)$: una evaluación de $f$}
+    \If{$\delta > \textit{mejorDelta}$}{
+      $\textit{mejor}\leftarrow j$; $\ \textit{mejorDelta}\leftarrow \delta$\;
+    }
+  }
+  $A \leftarrow A\cup\{\textit{mejor}\}$; $\ f_A \leftarrow f_A + \textit{mejorDelta}$\;
+}
+\Return{$A$}\;
+\end{algorithm}
+
+\paragraph{Correspondencia con la implementación.}\mbox{}\\
+En la función \texttt{seleccion\_voraz} del archivo \texttt{code/algoritmos.py} la utilidad es la de cobertura, $f(A)=|C(A)|$. En lugar de guardar $f_A$ se guarda el conjunto \texttt{cubierto} $=C(A)$, y la ganancia de la línea 6 se calcula con el Lema~\ref{lem:ganancia}: \texttt{delta = len(S[j] - cubierto)}, es decir, $\Delta_j(A)=|S_j\setminus C(A)|$. Al agregar el nodo se actualiza \texttt{cubierto |= S[mejor]}.
+
+\paragraph{Conteo de evaluaciones.} En la iteración $i$ quedan $N-(i-1)$ candidatos, y se evalúa $f$ una vez por candidato:
+\[
+T_{\text{voraz}}(N,k) = \sum_{i=1}^{k}\big(N-i+1\big) = kN - \frac{k(k-1)}{2}.
+\]
+Como $k<N$, se tiene $\frac{k(k-1)}{2} < \frac{kN}{2}$, y por lo tanto
+\[
+\frac{kN}{2} \;\le\; T_{\text{voraz}}(N,k) \;\le\; kN .
+\]
+\resultado{$T_{\text{voraz}}(N,k)\in\Theta(N\,k)$ evaluaciones de $f$; tiempo total $\Theta(N\,k\,\tau)$.}
+El algoritmo realiza siempre las mismas iteraciones, así que el mejor y el peor caso coinciden: $O(Nk)$, $\Omega(Nk)$ y $\Theta(Nk)$.
+
+\paragraph{Valor de $\tau$ para la utilidad implementada.} El enunciado exige precisar $\tau$. Con la utilidad de cobertura $f(A)=\big|\bigcup_{i\in A}S_i\big|$ y $s=\max_j|S_j|$:
+\begin{itemize}
+  \item \textbf{Voraz.} Se mantiene el conjunto de categorías ya cubiertas, $C(A)$, en una tabla hash. Por el Lema~\ref{lem:ganancia}, la ganancia es $\Delta_j(A)=|S_j\setminus C(A)|$, que se calcula recorriendo $S_j$: $\tau=O(s)$. Agregar el nodo elegido a $C(A)$ cuesta otro $O(s)$ por paso. En total,
+  \[
+  T_{\text{voraz}}(N,k)\in\Theta(N\,k)\ \text{evaluaciones}, \qquad \text{tiempo } O(N\,k\,s).
+  \]
+  \item \textbf{Exacto.} Cada hoja calcula la unión de $k$ conjuntos desde cero: $\tau=O(k\,s)$. En total, $\binom{N}{k}$ evaluaciones y tiempo $O\big(\binom{N}{k}(N + k\,s)\big)$.
+\end{itemize}
+
+\paragraph{Garantía de aproximación.}
+\begin{teorema}[\cite{nemhauser1978}]\label{teo:nwf}
+Si $f$ es normalizada, monótona y submodular, el grupo $A_g$ del Algoritmo~\ref{alg:voraz} cumple
+\[
+f(A_g) \;\ge\; \left(1-\frac1e\right) f(A^*) \;\approx\; 0.632\, f(A^*),
+\]
+donde $A^*$ es un grupo óptimo de tamaño a lo sumo $k$.
+\end{teorema}
+
+\textbf{Aplicación.} Las hipótesis del teorema son exactamente las condiciones 1--3 de $f$ en la formulación de \SEL. Para verificarlo en los datos, en instancias pequeñas (donde el Algoritmo~\ref{alg:exacto} es viable) se calcula la razón $f(A_g)/f(A^*)$ y se comprueba que es $\ge 1-1/e$.
+
+\textbf{La cota no se puede mejorar.} \textcite{feige1998} demostró que \MC{} no admite una aproximación mejor que $1-1/e$ en tiempo polinomial a menos que $\mathrm{P}=\mathrm{NP}$. Como \MC{} es un caso particular de \SEL{} (Sección~\ref{sec:reduccion}), el voraz alcanza la mejor garantía posible.
+
+\subsection{Resumen de funciones de eficiencia}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{lccc}
+\toprule
+\rowcolor{uccielo} \textbf{Algoritmo} & $O$ & $\Omega$ & $\Theta$ \\
+\midrule
+\multirow{2}{*}{Reparto voraz (P1)} & \multirow{2}{*}{$N + B\log N$} & \multirow{2}{*}{$N + B$} & peor: $N + B\log N$ \\
+ & & & mejor: $N+B$ \\
+\addlinespace
+Selección exacta con cupo (P2) & $\binom{N}{k}(N+\tau)$ & $\binom{N}{k}\tau$ & $\binom{N}{k}$ evaluaciones \\
+\addlinespace
+Selección exacta sin cupo (P2) & $2^N \tau$ & $2^N \tau$ & $2^N \tau$ \\
+\addlinespace
+Selección voraz (P2) & $NkE$ & $NkE$ & $Nk$ evaluaciones \\
+\bottomrule
+\end{tabular}
+\end{center}
