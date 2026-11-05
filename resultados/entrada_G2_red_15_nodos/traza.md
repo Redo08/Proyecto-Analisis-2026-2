@@ -1,204 +1,70 @@
 # Traza del caso `entrada_G2_red_15_nodos` (versión 1.1.0)
 
-N=15, rondas=3, k=5, B=30. u_i(x) = w_i*ln(1+x). Desempates: menor índice.
+N=15, k=5, B=30. u_i(x) = w_i*ln(1+x). Desempates: menor índice.
 
-## Ronda 1
+## 1. Selección de nodos (voraz por ganancia marginal Δ)
 
-### 1. Selección de nodos (voraz por ganancia marginal Δ)
+Δ de un candidato = cuántas categorías **nuevas** aporta, es decir, las que su conjunto tiene y aún no cubren los ya elegidos. Se recalcula en cada iteración (por eso un nodo con Δ alto al inicio puede aportar poco después). La última columna sigue al mejor candidato descartado en la iteración anterior.
 
-| Iter | Elegido | Δ del elegido | f(A) acumulada | Mejores 3 candidatos (nodo: Δ) |
-|---|---|---|---|---|
-| 1 | N11 | 10.5000 | 10.5000 | N11: 10.500, N09: 9.750, N07: 9.100 |
-| 2 | N14 | 0.8500 | 11.3500 | N14: 0.850, N13: 0.800, N15: 0.800 |
-| 3 | N15 | 0.7500 | 12.1000 | N15: 0.750, N12: 0.450, N13: 0.450 |
-| 4 | N12 | 0.4500 | 12.5500 | N12: 0.450, N13: 0.450, N01: 0.200 |
-| 5 | N13 | 0.4500 | 13.0000 | N13: 0.450, N01: 0.200, N02: 0.200 |
+| Iter | Elegido | Δ | Categorías nuevas | f(A) acumulada | Mejores 3 candidatos (nodo: Δ) | Mejor descartado antes (Δ antes → Δ ahora) |
+|---|---|---|---|---|---|---|
+| 1 | N03 | 7 | C01, C02, C08, C10, C15, C16, C18 | 7 | N03: 7, N10: 7, N11: 7 | — |
+| 2 | N10 | 6 | C07, C09, C13, C14, C17, C20 | 13 | N10: 6, N06: 5, N09: 5 | N10 (7 → 6) |
+| 3 | N08 | 4 | C05, C06, C12, C19 | 17 | N08: 4, N06: 3, N13: 3 | N06 (5 → 3) |
+| 4 | N09 | 2 | C03, C04 | 19 | N09: 2, N13: 2, N01: 1 | N06 (3 → 1) |
+| 5 | N01 | 1 | C11 | 20 | N01: 1, N05: 1, N13: 1 | N13 (2 → 1) |
 
-A = ['N11', 'N14', 'N15', 'N12', 'N13'],  f(A) = 13.0000  (óptimo exacto f* = 13.0000, razón 1.0000)
+A = ['N03', 'N10', 'N08', 'N09', 'N01'],  f(A) = 20  (óptimo exacto f* = 20, razón 1.0000)
 
-### 2. Reparto del presupuesto de ruido (una unidad por paso al mayor g_i(x))
-
-| Paso | Nodo | Ganancia marginal g | x del nodo | Próxima ganancia del nodo |
-|---|---|---|---|---|
-| 1 | N12 | 8.1791 | 1 | 4.7845 |
-| 2 | N14 | 7.0008 | 1 | 4.0952 |
-| 3 | N15 | 6.5849 | 1 | 3.8519 |
-| 4 | N13 | 5.7531 | 1 | 3.3654 |
-| 5 | N11 | 5.2679 | 1 | 3.0815 |
-| 6 | N12 | 4.7845 | 2 | 3.3946 |
-| 7 | N14 | 4.0952 | 2 | 2.9056 |
-| 8 | N15 | 3.8519 | 2 | 2.7330 |
-| 9 | N12 | 3.3946 | 3 | 2.6331 |
-| 10 | N13 | 3.3654 | 2 | 2.3878 |
-| 11 | N11 | 3.0815 | 2 | 2.1864 |
-| 12 | N14 | 2.9056 | 3 | 2.2537 |
-| 13 | N15 | 2.7330 | 3 | 2.1199 |
-| 14 | N12 | 2.6331 | 4 | 2.1514 |
-| 15 | N13 | 2.3878 | 3 | 1.8521 |
-| 16 | N14 | 2.2537 | 4 | 1.8414 |
-| 17 | N11 | 2.1864 | 3 | 1.6959 |
-| 18 | N12 | 2.1514 | 5 | 1.8190 |
-| 19 | N15 | 2.1199 | 4 | 1.7321 |
-| 20 | N13 | 1.8521 | 4 | 1.5133 |
-| 21 | N14 | 1.8414 | 5 | 1.5569 |
-| 22 | N12 | 1.8190 | 6 | 1.5757 |
-| 23 | N15 | 1.7321 | 5 | 1.4644 |
-| 24 | N11 | 1.6959 | 4 | 1.3856 |
-| 25 | N12 | 1.5757 | 7 | 1.3898 |
-| 26 | N14 | 1.5569 | 6 | 1.3487 |
-| 27 | N13 | 1.5133 | 5 | 1.2795 |
-| 28 | N15 | 1.4644 | 6 | 1.2685 |
-| 29 | N12 | 1.3898 | 8 | 1.2433 |
-| 30 | N11 | 1.3856 | 5 | 1.1715 |
-
-Reparto final: N11=5, N14=6, N15=6, N12=8, N13=5  (suma = 30, utilidad = 92.5561)
-
-### 3. Verificación de restricciones
-
-| Restricción | Tipo | Esperado | Obtenido | Resultado |
-|---|---|---|---|---|
-| |A| = k | obligatoria | 5 | 5 | CUMPLE |
-| nodos de A distintos y válidos | obligatoria | True | True | CUMPLE |
-| f(A) de la traza = f(A) recalculada desde cero | obligatoria | 13.0 | 13.0 | CUMPLE |
-| ganancias marginales de la selección no crecientes (submodularidad) | obligatoria | True | True | CUMPLE |
-| sum(x) = B | obligatoria | 30 | 30 | CUMPLE |
-| x_i entero >= 0 | obligatoria | True | True | CUMPLE |
-| ganancias del reparto no crecientes (concavidad) | obligatoria | True | True | CUMPLE |
-| reparto óptimo: ninguna transferencia de 1 unidad mejora la utilidad | obligatoria | <= 0 | 0.000e+00 | CUMPLE |
-| garantía f(voraz) >= (1-1/e) f(óptimo) | obligatoria | >= 8.2176 | 13.0000 | CUMPLE |
-| costo de participación de A <= presupuesto de costos (la base no lo impone) | informativa | <= 24 | 25 | **NO CUMPLE (informativa)** |
-| consumo acumulado por nodo <= presupuesto_total_nodo (la base no lo impone) | informativa | sin excesos | sin excesos | CUMPLE |
-
-## Ronda 2
-
-### 1. Selección de nodos (voraz por ganancia marginal Δ)
-
-| Iter | Elegido | Δ del elegido | f(A) acumulada | Mejores 3 candidatos (nodo: Δ) |
-|---|---|---|---|---|
-| 1 | N11 | 10.5000 | 10.5000 | N11: 10.500, N09: 9.750, N07: 9.100 |
-| 2 | N14 | 0.8500 | 11.3500 | N14: 0.850, N13: 0.800, N15: 0.800 |
-| 3 | N15 | 0.7500 | 12.1000 | N15: 0.750, N12: 0.450, N13: 0.450 |
-| 4 | N12 | 0.4500 | 12.5500 | N12: 0.450, N13: 0.450, N01: 0.200 |
-| 5 | N13 | 0.4500 | 13.0000 | N13: 0.450, N01: 0.200, N02: 0.200 |
-
-A = ['N11', 'N14', 'N15', 'N12', 'N13'],  f(A) = 13.0000  (óptimo exacto f* = 13.0000, razón 1.0000)
-
-### 2. Reparto del presupuesto de ruido (una unidad por paso al mayor g_i(x))
+## 2. Reparto del presupuesto de ruido (una unidad por paso al mayor g_i(x))
 
 | Paso | Nodo | Ganancia marginal g | x del nodo | Próxima ganancia del nodo |
 |---|---|---|---|---|
-| 1 | N12 | 8.1791 | 1 | 4.7845 |
-| 2 | N14 | 7.0008 | 1 | 4.0952 |
-| 3 | N15 | 6.5849 | 1 | 3.8519 |
-| 4 | N13 | 5.7531 | 1 | 3.3654 |
-| 5 | N11 | 5.2679 | 1 | 3.0815 |
-| 6 | N12 | 4.7845 | 2 | 3.3946 |
-| 7 | N14 | 4.0952 | 2 | 2.9056 |
-| 8 | N15 | 3.8519 | 2 | 2.7330 |
-| 9 | N12 | 3.3946 | 3 | 2.6331 |
-| 10 | N13 | 3.3654 | 2 | 2.3878 |
-| 11 | N11 | 3.0815 | 2 | 2.1864 |
-| 12 | N14 | 2.9056 | 3 | 2.2537 |
-| 13 | N15 | 2.7330 | 3 | 2.1199 |
-| 14 | N12 | 2.6331 | 4 | 2.1514 |
-| 15 | N13 | 2.3878 | 3 | 1.8521 |
-| 16 | N14 | 2.2537 | 4 | 1.8414 |
-| 17 | N11 | 2.1864 | 3 | 1.6959 |
-| 18 | N12 | 2.1514 | 5 | 1.8190 |
-| 19 | N15 | 2.1199 | 4 | 1.7321 |
-| 20 | N13 | 1.8521 | 4 | 1.5133 |
-| 21 | N14 | 1.8414 | 5 | 1.5569 |
-| 22 | N12 | 1.8190 | 6 | 1.5757 |
-| 23 | N15 | 1.7321 | 5 | 1.4644 |
-| 24 | N11 | 1.6959 | 4 | 1.3856 |
-| 25 | N12 | 1.5757 | 7 | 1.3898 |
-| 26 | N14 | 1.5569 | 6 | 1.3487 |
-| 27 | N13 | 1.5133 | 5 | 1.2795 |
-| 28 | N15 | 1.4644 | 6 | 1.2685 |
-| 29 | N12 | 1.3898 | 8 | 1.2433 |
-| 30 | N11 | 1.3856 | 5 | 1.1715 |
+| 1 | N10 | 8.5950 | 1 | 5.0278 |
+| 2 | N08 | 7.3474 | 1 | 4.2979 |
+| 3 | N09 | 6.8622 | 1 | 4.0141 |
+| 4 | N03 | 6.3076 | 1 | 3.6897 |
+| 5 | N01 | 5.8918 | 1 | 3.4465 |
+| 6 | N10 | 5.0278 | 2 | 3.5673 |
+| 7 | N08 | 4.2979 | 2 | 3.0494 |
+| 8 | N09 | 4.0141 | 2 | 2.8481 |
+| 9 | N03 | 3.6897 | 2 | 2.6179 |
+| 10 | N10 | 3.5673 | 3 | 2.7670 |
+| 11 | N01 | 3.4465 | 2 | 2.4453 |
+| 12 | N08 | 3.0494 | 3 | 2.3653 |
+| 13 | N09 | 2.8481 | 3 | 2.2091 |
+| 14 | N10 | 2.7670 | 4 | 2.2608 |
+| 15 | N03 | 2.6179 | 3 | 2.0306 |
+| 16 | N01 | 2.4453 | 3 | 1.8967 |
+| 17 | N08 | 2.3653 | 4 | 1.9326 |
+| 18 | N10 | 2.2608 | 5 | 1.9115 |
+| 19 | N09 | 2.2091 | 4 | 1.8050 |
+| 20 | N03 | 2.0306 | 4 | 1.6591 |
+| 21 | N08 | 1.9326 | 5 | 1.6340 |
+| 22 | N10 | 1.9115 | 6 | 1.6558 |
+| 23 | N01 | 1.8967 | 4 | 1.5497 |
+| 24 | N09 | 1.8050 | 5 | 1.5261 |
+| 25 | N03 | 1.6591 | 5 | 1.4028 |
+| 26 | N10 | 1.6558 | 7 | 1.4605 |
+| 27 | N08 | 1.6340 | 6 | 1.4154 |
+| 28 | N01 | 1.5497 | 5 | 1.3103 |
+| 29 | N09 | 1.5261 | 6 | 1.3220 |
+| 30 | N10 | 1.4605 | 8 | 1.3065 |
 
-Reparto final: N11=5, N14=6, N15=6, N12=8, N13=5  (suma = 30, utilidad = 92.5561)
+Reparto final: N03=5, N10=8, N08=6, N09=6, N01=5  (suma = 30, utilidad = 98.6717)
 
-### 3. Verificación de restricciones
+## 3. Verificación de restricciones
 
-| Restricción | Tipo | Esperado | Obtenido | Resultado |
-|---|---|---|---|---|
-| |A| = k | obligatoria | 5 | 5 | CUMPLE |
-| nodos de A distintos y válidos | obligatoria | True | True | CUMPLE |
-| f(A) de la traza = f(A) recalculada desde cero | obligatoria | 13.0 | 13.0 | CUMPLE |
-| ganancias marginales de la selección no crecientes (submodularidad) | obligatoria | True | True | CUMPLE |
-| sum(x) = B | obligatoria | 30 | 30 | CUMPLE |
-| x_i entero >= 0 | obligatoria | True | True | CUMPLE |
-| ganancias del reparto no crecientes (concavidad) | obligatoria | True | True | CUMPLE |
-| reparto óptimo: ninguna transferencia de 1 unidad mejora la utilidad | obligatoria | <= 0 | 0.000e+00 | CUMPLE |
-| garantía f(voraz) >= (1-1/e) f(óptimo) | obligatoria | >= 8.2176 | 13.0000 | CUMPLE |
-| costo de participación de A <= presupuesto de costos (la base no lo impone) | informativa | <= 24 | 25 | **NO CUMPLE (informativa)** |
-| consumo acumulado por nodo <= presupuesto_total_nodo (la base no lo impone) | informativa | sin excesos | sin excesos | CUMPLE |
-
-## Ronda 3
-
-### 1. Selección de nodos (voraz por ganancia marginal Δ)
-
-| Iter | Elegido | Δ del elegido | f(A) acumulada | Mejores 3 candidatos (nodo: Δ) |
-|---|---|---|---|---|
-| 1 | N11 | 10.5000 | 10.5000 | N11: 10.500, N09: 9.750, N07: 9.100 |
-| 2 | N14 | 0.8500 | 11.3500 | N14: 0.850, N13: 0.800, N15: 0.800 |
-| 3 | N15 | 0.7500 | 12.1000 | N15: 0.750, N12: 0.450, N13: 0.450 |
-| 4 | N12 | 0.4500 | 12.5500 | N12: 0.450, N13: 0.450, N01: 0.200 |
-| 5 | N13 | 0.4500 | 13.0000 | N13: 0.450, N01: 0.200, N02: 0.200 |
-
-A = ['N11', 'N14', 'N15', 'N12', 'N13'],  f(A) = 13.0000  (óptimo exacto f* = 13.0000, razón 1.0000)
-
-### 2. Reparto del presupuesto de ruido (una unidad por paso al mayor g_i(x))
-
-| Paso | Nodo | Ganancia marginal g | x del nodo | Próxima ganancia del nodo |
-|---|---|---|---|---|
-| 1 | N12 | 8.1791 | 1 | 4.7845 |
-| 2 | N14 | 7.0008 | 1 | 4.0952 |
-| 3 | N15 | 6.5849 | 1 | 3.8519 |
-| 4 | N13 | 5.7531 | 1 | 3.3654 |
-| 5 | N11 | 5.2679 | 1 | 3.0815 |
-| 6 | N12 | 4.7845 | 2 | 3.3946 |
-| 7 | N14 | 4.0952 | 2 | 2.9056 |
-| 8 | N15 | 3.8519 | 2 | 2.7330 |
-| 9 | N12 | 3.3946 | 3 | 2.6331 |
-| 10 | N13 | 3.3654 | 2 | 2.3878 |
-| 11 | N11 | 3.0815 | 2 | 2.1864 |
-| 12 | N14 | 2.9056 | 3 | 2.2537 |
-| 13 | N15 | 2.7330 | 3 | 2.1199 |
-| 14 | N12 | 2.6331 | 4 | 2.1514 |
-| 15 | N13 | 2.3878 | 3 | 1.8521 |
-| 16 | N14 | 2.2537 | 4 | 1.8414 |
-| 17 | N11 | 2.1864 | 3 | 1.6959 |
-| 18 | N12 | 2.1514 | 5 | 1.8190 |
-| 19 | N15 | 2.1199 | 4 | 1.7321 |
-| 20 | N13 | 1.8521 | 4 | 1.5133 |
-| 21 | N14 | 1.8414 | 5 | 1.5569 |
-| 22 | N12 | 1.8190 | 6 | 1.5757 |
-| 23 | N15 | 1.7321 | 5 | 1.4644 |
-| 24 | N11 | 1.6959 | 4 | 1.3856 |
-| 25 | N12 | 1.5757 | 7 | 1.3898 |
-| 26 | N14 | 1.5569 | 6 | 1.3487 |
-| 27 | N13 | 1.5133 | 5 | 1.2795 |
-| 28 | N15 | 1.4644 | 6 | 1.2685 |
-| 29 | N12 | 1.3898 | 8 | 1.2433 |
-| 30 | N11 | 1.3856 | 5 | 1.1715 |
-
-Reparto final: N11=5, N14=6, N15=6, N12=8, N13=5  (suma = 30, utilidad = 92.5561)
-
-### 3. Verificación de restricciones
-
-| Restricción | Tipo | Esperado | Obtenido | Resultado |
-|---|---|---|---|---|
-| |A| = k | obligatoria | 5 | 5 | CUMPLE |
-| nodos de A distintos y válidos | obligatoria | True | True | CUMPLE |
-| f(A) de la traza = f(A) recalculada desde cero | obligatoria | 13.0 | 13.0 | CUMPLE |
-| ganancias marginales de la selección no crecientes (submodularidad) | obligatoria | True | True | CUMPLE |
-| sum(x) = B | obligatoria | 30 | 30 | CUMPLE |
-| x_i entero >= 0 | obligatoria | True | True | CUMPLE |
-| ganancias del reparto no crecientes (concavidad) | obligatoria | True | True | CUMPLE |
-| reparto óptimo: ninguna transferencia de 1 unidad mejora la utilidad | obligatoria | <= 0 | 0.000e+00 | CUMPLE |
-| garantía f(voraz) >= (1-1/e) f(óptimo) | obligatoria | >= 8.2176 | 13.0000 | CUMPLE |
-| costo de participación de A <= presupuesto de costos (la base no lo impone) | informativa | <= 24 | 25 | **NO CUMPLE (informativa)** |
-| consumo acumulado por nodo <= presupuesto_total_nodo (la base no lo impone) | informativa | sin excesos | excede: N12 | **NO CUMPLE (informativa)** |
+| Restricción | Esperado | Obtenido | Resultado |
+|---|---|---|---|
+| tamaño de A = k | 5 | 5 | CUMPLE |
+| nodos de A distintos y válidos | True | True | CUMPLE |
+| f(A) de la traza = f(A) recalculada desde cero | 20 | 20 | CUMPLE |
+| ganancias marginales de la selección no crecientes (submodularidad) | True | True | CUMPLE |
+| selección idéntica a la implementación del informe (algoritmos.py) | [2, 9, 7, 8, 0] | [2, 9, 7, 8, 0] | CUMPLE |
+| sum(x) = B | 30 | 30 | CUMPLE |
+| x_i entero >= 0 | True | True | CUMPLE |
+| ganancias del reparto no crecientes (concavidad) | True | True | CUMPLE |
+| reparto idéntico a la implementación del informe (algoritmos.py) | [5, 8, 6, 6, 5] | [5, 8, 6, 6, 5] | CUMPLE |
+| reparto óptimo: ninguna transferencia de 1 unidad mejora la utilidad | <= 0 | 0.000e+00 | CUMPLE |
+| garantía f(voraz) >= (1-1/e) f(óptimo) | >= 12.6424 | 20 | CUMPLE |

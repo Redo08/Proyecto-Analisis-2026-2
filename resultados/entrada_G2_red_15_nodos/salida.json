@@ -3,10 +3,8 @@
   "caso": "entrada_G2_red_15_nodos",
   "parametros": {
     "N": 15,
-    "rondas": 3,
     "k": 5,
     "B": 30,
-    "B_costos": 24,
     "funcion_utilidad": {
       "tipo": "log",
       "formula": "w_i*ln(1+x)"
@@ -17,329 +15,135 @@
     "sistema": "Windows-11-10.0.26300-SP0"
   },
   "tiempo": {
-    "mediana_por_ronda_s": 0.0001762998290359974,
+    "mediana_s": 0.0001354000996798277,
     "repeticiones": 5,
     "todas_s": [
-      0.0002470000181347132,
-      0.0001829999964684248,
-      0.0001762998290359974,
-      0.00016689999029040337,
-      0.0001564000267535448
-    ],
-    "total_rondas_s": 0.0005288994871079922
-  },
-  "referencia_exacta": {
-    "f_optimo": 13.0,
-    "A": [
-      "N11",
-      "N12",
-      "N13",
-      "N14",
-      "N15"
+      0.00022620009258389473,
+      0.00010439986363053322,
+      0.00013939989730715752,
+      0.0001354000996798277,
+      8.9599983766675e-05
     ]
   },
-  "restricciones_obligatorias_ok": true,
-  "restricciones_informativas_incumplidas": [
-    "consumo acumulado por nodo <= presupuesto_total_nodo (la base no lo impone)",
-    "costo de participación de A <= presupuesto de costos (la base no lo impone)"
-  ],
-  "rondas": [
-    {
-      "ronda": 1,
-      "seleccion": [
-        "N11",
-        "N14",
-        "N15",
-        "N12",
-        "N13"
-      ],
-      "f_A": 13.0,
-      "reparto": {
-        "N11": 5,
-        "N14": 6,
-        "N15": 6,
-        "N12": 8,
-        "N13": 5
-      },
-      "utilidad_reparto": 92.5560644947776,
-      "costo_participacion": 25,
-      "verificacion": [
-        {
-          "nombre": "|A| = k",
-          "esperado": 5,
-          "obtenido": 5,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "nodos de A distintos y válidos",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "f(A) de la traza = f(A) recalculada desde cero",
-          "esperado": 13.0,
-          "obtenido": 13.0,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "ganancias marginales de la selección no crecientes (submodularidad)",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "sum(x) = B",
-          "esperado": 30,
-          "obtenido": 30,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "x_i entero >= 0",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "ganancias del reparto no crecientes (concavidad)",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "reparto óptimo: ninguna transferencia de 1 unidad mejora la utilidad",
-          "esperado": "<= 0",
-          "obtenido": "0.000e+00",
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "garantía f(voraz) >= (1-1/e) f(óptimo)",
-          "esperado": ">= 8.2176",
-          "obtenido": "13.0000",
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "costo de participación de A <= presupuesto de costos (la base no lo impone)",
-          "esperado": "<= 24",
-          "obtenido": 25,
-          "cumple": false,
-          "tipo": "informativa"
-        },
-        {
-          "nombre": "consumo acumulado por nodo <= presupuesto_total_nodo (la base no lo impone)",
-          "esperado": "sin excesos",
-          "obtenido": "sin excesos",
-          "cumple": true,
-          "tipo": "informativa"
-        }
-      ]
+  "referencia_exacta": {
+    "f_optimo": 20,
+    "A": [
+      "N01",
+      "N03",
+      "N08",
+      "N09",
+      "N10"
+    ]
+  },
+  "restricciones_ok": true,
+  "resultado": {
+    "seleccion": [
+      "N03",
+      "N10",
+      "N08",
+      "N09",
+      "N01"
+    ],
+    "f_A": 20,
+    "reparto": {
+      "N03": 5,
+      "N10": 8,
+      "N08": 6,
+      "N09": 6,
+      "N01": 5
     },
-    {
-      "ronda": 2,
-      "seleccion": [
-        "N11",
-        "N14",
-        "N15",
-        "N12",
-        "N13"
-      ],
-      "f_A": 13.0,
-      "reparto": {
-        "N11": 5,
-        "N14": 6,
-        "N15": 6,
-        "N12": 8,
-        "N13": 5
+    "utilidad_reparto": 98.6717094730168,
+    "verificacion": [
+      {
+        "nombre": "tamaño de A = k",
+        "esperado": 5,
+        "obtenido": 5,
+        "cumple": true
       },
-      "utilidad_reparto": 92.5560644947776,
-      "costo_participacion": 25,
-      "verificacion": [
-        {
-          "nombre": "|A| = k",
-          "esperado": 5,
-          "obtenido": 5,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "nodos de A distintos y válidos",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "f(A) de la traza = f(A) recalculada desde cero",
-          "esperado": 13.0,
-          "obtenido": 13.0,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "ganancias marginales de la selección no crecientes (submodularidad)",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "sum(x) = B",
-          "esperado": 30,
-          "obtenido": 30,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "x_i entero >= 0",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "ganancias del reparto no crecientes (concavidad)",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "reparto óptimo: ninguna transferencia de 1 unidad mejora la utilidad",
-          "esperado": "<= 0",
-          "obtenido": "0.000e+00",
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "garantía f(voraz) >= (1-1/e) f(óptimo)",
-          "esperado": ">= 8.2176",
-          "obtenido": "13.0000",
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "costo de participación de A <= presupuesto de costos (la base no lo impone)",
-          "esperado": "<= 24",
-          "obtenido": 25,
-          "cumple": false,
-          "tipo": "informativa"
-        },
-        {
-          "nombre": "consumo acumulado por nodo <= presupuesto_total_nodo (la base no lo impone)",
-          "esperado": "sin excesos",
-          "obtenido": "sin excesos",
-          "cumple": true,
-          "tipo": "informativa"
-        }
-      ]
-    },
-    {
-      "ronda": 3,
-      "seleccion": [
-        "N11",
-        "N14",
-        "N15",
-        "N12",
-        "N13"
-      ],
-      "f_A": 13.0,
-      "reparto": {
-        "N11": 5,
-        "N14": 6,
-        "N15": 6,
-        "N12": 8,
-        "N13": 5
+      {
+        "nombre": "nodos de A distintos y válidos",
+        "esperado": true,
+        "obtenido": true,
+        "cumple": true
       },
-      "utilidad_reparto": 92.5560644947776,
-      "costo_participacion": 25,
-      "verificacion": [
-        {
-          "nombre": "|A| = k",
-          "esperado": 5,
-          "obtenido": 5,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "nodos de A distintos y válidos",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "f(A) de la traza = f(A) recalculada desde cero",
-          "esperado": 13.0,
-          "obtenido": 13.0,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "ganancias marginales de la selección no crecientes (submodularidad)",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "sum(x) = B",
-          "esperado": 30,
-          "obtenido": 30,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "x_i entero >= 0",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "ganancias del reparto no crecientes (concavidad)",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "reparto óptimo: ninguna transferencia de 1 unidad mejora la utilidad",
-          "esperado": "<= 0",
-          "obtenido": "0.000e+00",
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "garantía f(voraz) >= (1-1/e) f(óptimo)",
-          "esperado": ">= 8.2176",
-          "obtenido": "13.0000",
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "costo de participación de A <= presupuesto de costos (la base no lo impone)",
-          "esperado": "<= 24",
-          "obtenido": 25,
-          "cumple": false,
-          "tipo": "informativa"
-        },
-        {
-          "nombre": "consumo acumulado por nodo <= presupuesto_total_nodo (la base no lo impone)",
-          "esperado": "sin excesos",
-          "obtenido": "excede: N12",
-          "cumple": false,
-          "tipo": "informativa"
-        }
-      ]
-    }
-  ]
+      {
+        "nombre": "f(A) de la traza = f(A) recalculada desde cero",
+        "esperado": 20,
+        "obtenido": 20,
+        "cumple": true
+      },
+      {
+        "nombre": "ganancias marginales de la selección no crecientes (submodularidad)",
+        "esperado": true,
+        "obtenido": true,
+        "cumple": true
+      },
+      {
+        "nombre": "selección idéntica a la implementación del informe (algoritmos.py)",
+        "esperado": [
+          2,
+          9,
+          7,
+          8,
+          0
+        ],
+        "obtenido": [
+          2,
+          9,
+          7,
+          8,
+          0
+        ],
+        "cumple": true
+      },
+      {
+        "nombre": "sum(x) = B",
+        "esperado": 30,
+        "obtenido": 30,
+        "cumple": true
+      },
+      {
+        "nombre": "x_i entero >= 0",
+        "esperado": true,
+        "obtenido": true,
+        "cumple": true
+      },
+      {
+        "nombre": "ganancias del reparto no crecientes (concavidad)",
+        "esperado": true,
+        "obtenido": true,
+        "cumple": true
+      },
+      {
+        "nombre": "reparto idéntico a la implementación del informe (algoritmos.py)",
+        "esperado": [
+          5,
+          8,
+          6,
+          6,
+          5
+        ],
+        "obtenido": [
+          5,
+          8,
+          6,
+          6,
+          5
+        ],
+        "cumple": true
+      },
+      {
+        "nombre": "reparto óptimo: ninguna transferencia de 1 unidad mejora la utilidad",
+        "esperado": "<= 0",
+        "obtenido": "0.000e+00",
+        "cumple": true
+      },
+      {
+        "nombre": "garantía f(voraz) >= (1-1/e) f(óptimo)",
+        "esperado": ">= 12.6424",
+        "obtenido": 20,
+        "cumple": true
+      }
+    ]
+  }
 }

@@ -19,6 +19,7 @@ python src/ejecutar_casos.py                  # 1. ejecuta todos los casos de ca
 | Más repeticiones para el tiempo / otra carpeta de salida | `python src/ejecutar_casos.py -r 10 -o mis_resultados` |
 | Cambiar la función de utilidad (log, sqrt, saturacion, potencia) | `python src/ejecutar_casos.py --utilidad saturacion` (o la clave `funcion_utilidad` del JSON; ver manual §2.2) |
 | Ver todas las opciones | `python src/ejecutar_casos.py --help` |
+| Agregar categorías a un caso que no las trae | `python src/generar_categorias.py caso.json -o caso_con_categorias.json` |
 | Regenerar gráficas del informe (opcional) | `pip install -r requirements.txt` y `python Informe/code/experimentos.py` |
 
 En Windows, si `python` no se reconoce, usar `py`. Para agregar un caso basta con copiar su `.json` a `casos/` y volver a ejecutar; no hay que editar código.
@@ -37,20 +38,24 @@ En Windows, si `python` no se reconoce, usar `py`. Para agregar un caso basta co
 | Algoritmos del informe (Parte 1 y 2) | [Informe/code/algoritmos.py](Informe/code/algoritmos.py) |
 | Código que aplica la solución a un caso | [src/](src/) |
 | Funciones de utilidad u_i(x) disponibles | [src/utilidades.py](src/utilidades.py) |
+| Agregar categorías a un caso que no las trae | [src/generar_categorias.py](src/generar_categorias.py) (ver manual §4) |
 | Experimentos y gráficas del informe | [Informe/code/experimentos.py](Informe/code/experimentos.py) (requiere `pip install -r requirements.txt`) |
 
 ## Resultado del caso incluido (`entrada_G2_red_15_nodos`)
 
-- Selección (ronda 1, idéntica en las 3): N11, N14, N15, N12, N13 con f(A) = 13.0 (coincide con el óptimo exacto).
-- Reparto de B = 30 (con la utilidad por defecto `log`): N11=5, N14=6, N15=6, N12=8, N13=5 (utilidad 92.56).
-- Todas las restricciones obligatorias se cumplen. **Dos restricciones del enunciado que la solución base no modela se incumplen** y quedan reportadas como informativas: el costo de participación de A es 25 frente a un presupuesto de 24, y N12 acumula 24 unidades en 3 rondas frente a su presupuesto total de 18. Se resuelven en la variante con costos y rondas (ver *Limitaciones* en el manual).
+Los coeficientes de utilidad vienen de la entrada recibida; las **categorías de cada nodo son sintéticas** (la entrada no las traía; se generaron con semilla 2026, ver manual §4).
+
+- Selección: N03, N10, N08, N09, N01 con f(A) = 20 categorías cubiertas (coincide con el óptimo exacto).
+- Reparto de B = 30 (con la utilidad por defecto `log`): N03=5, N10=8, N08=6, N09=6, N01=5 (utilidad 98.67).
+- Todas las restricciones se cumplen, incluida la coincidencia con las implementaciones de `Informe/code/algoritmos.py`.
+- Es la solución **base**: no incluye las variantes (costos de participación distintos, rondas con fallas, nodos relacionados). Si un caso trae esos campos (`grafo`, `numero_rondas`, costos...), se ignoran.
 
 ## Estructura
 
 ```
 VERSION  README.md  requirements.txt
 casos/        entradas .json
-src/          entrada.py, utilidades.py, solucion.py, verificacion.py, ejecutar_casos.py
+src/          entrada.py, utilidades.py, solucion.py, verificacion.py, ejecutar_casos.py, generar_categorias.py
 resultados/   generado por ejecutar_casos.py
 docs/         manual_tecnico.md
 Informe/      informe LaTeX, code/ (algoritmos del informe y experimentos)

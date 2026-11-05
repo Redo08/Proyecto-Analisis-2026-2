@@ -1,1209 +1,445 @@
 {
   "version": "1.1.0",
   "caso": "entrada_G2_red_15_nodos",
-  "rondas": [
+  "seleccion": [
     {
-      "ronda": 1,
-      "seleccion": [
-        {
-          "iteracion": 1,
-          "deltas": {
-            "N01": 7.75,
-            "N02": 7.75,
-            "N03": 8.1,
-            "N04": 7.5,
-            "N05": 8.55,
-            "N06": 7.35,
-            "N07": 9.1,
-            "N08": 7.300000000000001,
-            "N09": 9.75,
-            "N10": 7.3500000000000005,
-            "N11": 10.5,
-            "N12": 7.5,
-            "N13": 4.2,
-            "N14": 8.4,
-            "N15": 4.5
-          },
-          "elegido": "N11",
-          "ganancia": 10.5,
-          "f_acumulada": 10.5
-        },
-        {
-          "iteracion": 2,
-          "deltas": {
-            "N01": 0.19999999999999996,
-            "N02": 0.19999999999999996,
-            "N03": 0.19999999999999996,
-            "N04": 0.19999999999999996,
-            "N05": 0.19999999999999996,
-            "N06": 0.19999999999999996,
-            "N07": 0.19999999999999996,
-            "N08": 0.19999999999999996,
-            "N09": 0.19999999999999996,
-            "N10": 0.19999999999999996,
-            "N12": 0.5,
-            "N13": 0.8,
-            "N14": 0.8500000000000001,
-            "N15": 0.8
-          },
-          "elegido": "N14",
-          "ganancia": 0.8500000000000001,
-          "f_acumulada": 11.350000000000001
-        },
-        {
-          "iteracion": 3,
-          "deltas": {
-            "N01": 0.19999999999999996,
-            "N02": 0.19999999999999996,
-            "N03": 0.19999999999999996,
-            "N04": 0.19999999999999996,
-            "N05": 0.19999999999999996,
-            "N06": 0.19999999999999996,
-            "N07": 0.19999999999999996,
-            "N08": 0.19999999999999996,
-            "N09": 0.19999999999999996,
-            "N10": 0.19999999999999996,
-            "N12": 0.44999999999999996,
-            "N13": 0.44999999999999996,
-            "N15": 0.75
-          },
-          "elegido": "N15",
-          "ganancia": 0.75,
-          "f_acumulada": 12.100000000000001
-        },
-        {
-          "iteracion": 4,
-          "deltas": {
-            "N01": 0.19999999999999996,
-            "N02": 0.19999999999999996,
-            "N03": 0.19999999999999996,
-            "N04": 0.19999999999999996,
-            "N05": 0.19999999999999996,
-            "N06": 0.19999999999999996,
-            "N07": 0.19999999999999996,
-            "N08": 0.19999999999999996,
-            "N09": 0.19999999999999996,
-            "N10": 0.19999999999999996,
-            "N12": 0.44999999999999996,
-            "N13": 0.44999999999999996
-          },
-          "elegido": "N12",
-          "ganancia": 0.44999999999999996,
-          "f_acumulada": 12.55
-        },
-        {
-          "iteracion": 5,
-          "deltas": {
-            "N01": 0.19999999999999996,
-            "N02": 0.19999999999999996,
-            "N03": 0.19999999999999996,
-            "N04": 0.19999999999999996,
-            "N05": 0.19999999999999996,
-            "N06": 0.19999999999999996,
-            "N07": 0.19999999999999996,
-            "N08": 0.19999999999999996,
-            "N09": 0.19999999999999996,
-            "N10": 0.19999999999999996,
-            "N13": 0.44999999999999996
-          },
-          "elegido": "N13",
-          "ganancia": 0.44999999999999996,
-          "f_acumulada": 13.0
-        }
+      "iteracion": 1,
+      "deltas": {
+        "N01": 3,
+        "N02": 3,
+        "N03": 7,
+        "N04": 3,
+        "N05": 3,
+        "N06": 6,
+        "N07": 5,
+        "N08": 6,
+        "N09": 6,
+        "N10": 7,
+        "N11": 7,
+        "N12": 3,
+        "N13": 6,
+        "N14": 6,
+        "N15": 7
+      },
+      "elegido": "N03",
+      "ganancia": 7,
+      "nuevas": [
+        "C01",
+        "C02",
+        "C08",
+        "C10",
+        "C15",
+        "C16",
+        "C18"
       ],
-      "reparto": [
-        {
-          "paso": 1,
-          "nodo": "N12",
-          "ganancia": 8.179136730607356,
-          "x_nodo": 1,
-          "proxima_ganancia": 4.78448827567634
-        },
-        {
-          "paso": 2,
-          "nodo": "N14",
-          "ganancia": 7.000786523655447,
-          "x_nodo": 1,
-          "proxima_ganancia": 4.095197591892462
-        },
-        {
-          "paso": 3,
-          "nodo": "N15",
-          "ganancia": 6.58489821531948,
-          "x_nodo": 1,
-          "proxima_ganancia": 3.8519185270275624
-        },
-        {
-          "paso": 4,
-          "nodo": "N13",
-          "ganancia": 5.753121598647547,
-          "x_nodo": 1,
-          "proxima_ganancia": 3.3653603972977644
-        },
-        {
-          "paso": 5,
-          "nodo": "N11",
-          "ganancia": 5.267918572255584,
-          "x_nodo": 1,
-          "proxima_ganancia": 3.081534821622049
-        },
-        {
-          "paso": 6,
-          "nodo": "N12",
-          "ganancia": 4.78448827567634,
-          "x_nodo": 2,
-          "proxima_ganancia": 3.3946484549310156
-        },
-        {
-          "paso": 7,
-          "nodo": "N14",
-          "ganancia": 4.095197591892462,
-          "x_nodo": 2,
-          "proxima_ganancia": 2.905588931762985
-        },
-        {
-          "paso": 8,
-          "nodo": "N15",
-          "ganancia": 3.8519185270275624,
-          "x_nodo": 2,
-          "proxima_ganancia": 2.732979688291918
-        },
-        {
-          "paso": 9,
-          "nodo": "N12",
-          "ganancia": 3.3946484549310156,
-          "x_nodo": 3,
-          "proxima_ganancia": 2.6330939055076747
-        },
-        {
-          "paso": 10,
-          "nodo": "N13",
-          "ganancia": 3.3653603972977644,
-          "x_nodo": 2,
-          "proxima_ganancia": 2.3877612013497824
-        },
-        {
-          "paso": 11,
-          "nodo": "N11",
-          "ganancia": 3.081534821622049,
-          "x_nodo": 2,
-          "proxima_ganancia": 2.186383750633535
-        },
-        {
-          "paso": 12,
-          "nodo": "N14",
-          "ganancia": 2.905588931762985,
-          "x_nodo": 3,
-          "proxima_ganancia": 2.253749868273518
-        },
-        {
-          "paso": 13,
-          "nodo": "N15",
-          "ganancia": 2.732979688291918,
-          "x_nodo": 3,
-          "proxima_ganancia": 2.1198637374849927
-        },
-        {
-          "paso": 14,
-          "nodo": "N12",
-          "ganancia": 2.6330939055076747,
-          "x_nodo": 4,
-          "proxima_ganancia": 2.1513943701686635
-        },
-        {
-          "paso": 15,
-          "nodo": "N13",
-          "ganancia": 2.3877612013497824,
-          "x_nodo": 3,
-          "proxima_ganancia": 1.8520914759079403
-        },
-        {
-          "paso": 16,
-          "nodo": "N14",
-          "ganancia": 2.253749868273518,
-          "x_nodo": 4,
-          "proxima_ganancia": 1.8414477236189413
-        },
-        {
-          "paso": 17,
-          "nodo": "N11",
-          "ganancia": 2.186383750633535,
-          "x_nodo": 3,
-          "proxima_ganancia": 1.6958909899879941
-        },
-        {
-          "paso": 18,
-          "nodo": "N12",
-          "ganancia": 2.1513943701686635,
-          "x_nodo": 5,
-          "proxima_ganancia": 1.818978021961648
-        },
-        {
-          "paso": 19,
-          "nodo": "N15",
-          "ganancia": 2.1198637374849927,
-          "x_nodo": 4,
-          "proxima_ganancia": 1.732054789542568
-        },
-        {
-          "paso": 20,
-          "nodo": "N13",
-          "ganancia": 1.8520914759079403,
-          "x_nodo": 4,
-          "proxima_ganancia": 1.5132689213898232
-        },
-        {
-          "paso": 21,
-          "nodo": "N14",
-          "ganancia": 1.8414477236189413,
-          "x_nodo": 5,
-          "proxima_ganancia": 1.556921866255312
-        },
-        {
-          "paso": 22,
-          "nodo": "N12",
-          "ganancia": 1.818978021961648,
-          "x_nodo": 6,
-          "proxima_ganancia": 1.575670432969364
-        },
-        {
-          "paso": 23,
-          "nodo": "N15",
-          "ganancia": 1.732054789542568,
-          "x_nodo": 5,
-          "proxima_ganancia": 1.4644314583589555
-        },
-        {
-          "paso": 24,
-          "nodo": "N11",
-          "ganancia": 1.6958909899879941,
-          "x_nodo": 4,
-          "proxima_ganancia": 1.385643831634054
-        },
-        {
-          "paso": 25,
-          "nodo": "N12",
-          "ganancia": 1.575670432969364,
-          "x_nodo": 7,
-          "proxima_ganancia": 1.3898398207453297
-        },
-        {
-          "paso": 26,
-          "nodo": "N14",
-          "ganancia": 1.556921866255312,
-          "x_nodo": 6,
-          "proxima_ganancia": 1.3486670655076765
-        },
-        {
-          "paso": 27,
-          "nodo": "N13",
-          "ganancia": 1.5132689213898232,
-          "x_nodo": 5,
-          "proxima_ganancia": 1.2794506425662444
-        },
-        {
-          "paso": 28,
-          "nodo": "N15",
-          "ganancia": 1.4644314583589555,
-          "x_nodo": 6,
-          "proxima_ganancia": 1.2685482299329642
-        },
-        {
-          "paso": 29,
-          "nodo": "N12",
-          "ganancia": 1.3898398207453297,
-          "x_nodo": 8,
-          "proxima_ganancia": 1.243254084762352
-        },
-        {
-          "paso": 30,
-          "nodo": "N11",
-          "ganancia": 1.385643831634054,
-          "x_nodo": 5,
-          "proxima_ganancia": 1.1715451666871637
-        }
-      ],
-      "verificacion": [
-        {
-          "nombre": "|A| = k",
-          "esperado": 5,
-          "obtenido": 5,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "nodos de A distintos y válidos",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "f(A) de la traza = f(A) recalculada desde cero",
-          "esperado": 13.0,
-          "obtenido": 13.0,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "ganancias marginales de la selección no crecientes (submodularidad)",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "sum(x) = B",
-          "esperado": 30,
-          "obtenido": 30,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "x_i entero >= 0",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "ganancias del reparto no crecientes (concavidad)",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "reparto óptimo: ninguna transferencia de 1 unidad mejora la utilidad",
-          "esperado": "<= 0",
-          "obtenido": "0.000e+00",
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "garantía f(voraz) >= (1-1/e) f(óptimo)",
-          "esperado": ">= 8.2176",
-          "obtenido": "13.0000",
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "costo de participación de A <= presupuesto de costos (la base no lo impone)",
-          "esperado": "<= 24",
-          "obtenido": 25,
-          "cumple": false,
-          "tipo": "informativa"
-        },
-        {
-          "nombre": "consumo acumulado por nodo <= presupuesto_total_nodo (la base no lo impone)",
-          "esperado": "sin excesos",
-          "obtenido": "sin excesos",
-          "cumple": true,
-          "tipo": "informativa"
-        }
-      ]
+      "f_acumulada": 7
     },
     {
-      "ronda": 2,
-      "seleccion": [
-        {
-          "iteracion": 1,
-          "deltas": {
-            "N01": 7.75,
-            "N02": 7.75,
-            "N03": 8.1,
-            "N04": 7.5,
-            "N05": 8.55,
-            "N06": 7.35,
-            "N07": 9.1,
-            "N08": 7.300000000000001,
-            "N09": 9.75,
-            "N10": 7.3500000000000005,
-            "N11": 10.5,
-            "N12": 7.5,
-            "N13": 4.2,
-            "N14": 8.4,
-            "N15": 4.5
-          },
-          "elegido": "N11",
-          "ganancia": 10.5,
-          "f_acumulada": 10.5
-        },
-        {
-          "iteracion": 2,
-          "deltas": {
-            "N01": 0.19999999999999996,
-            "N02": 0.19999999999999996,
-            "N03": 0.19999999999999996,
-            "N04": 0.19999999999999996,
-            "N05": 0.19999999999999996,
-            "N06": 0.19999999999999996,
-            "N07": 0.19999999999999996,
-            "N08": 0.19999999999999996,
-            "N09": 0.19999999999999996,
-            "N10": 0.19999999999999996,
-            "N12": 0.5,
-            "N13": 0.8,
-            "N14": 0.8500000000000001,
-            "N15": 0.8
-          },
-          "elegido": "N14",
-          "ganancia": 0.8500000000000001,
-          "f_acumulada": 11.350000000000001
-        },
-        {
-          "iteracion": 3,
-          "deltas": {
-            "N01": 0.19999999999999996,
-            "N02": 0.19999999999999996,
-            "N03": 0.19999999999999996,
-            "N04": 0.19999999999999996,
-            "N05": 0.19999999999999996,
-            "N06": 0.19999999999999996,
-            "N07": 0.19999999999999996,
-            "N08": 0.19999999999999996,
-            "N09": 0.19999999999999996,
-            "N10": 0.19999999999999996,
-            "N12": 0.44999999999999996,
-            "N13": 0.44999999999999996,
-            "N15": 0.75
-          },
-          "elegido": "N15",
-          "ganancia": 0.75,
-          "f_acumulada": 12.100000000000001
-        },
-        {
-          "iteracion": 4,
-          "deltas": {
-            "N01": 0.19999999999999996,
-            "N02": 0.19999999999999996,
-            "N03": 0.19999999999999996,
-            "N04": 0.19999999999999996,
-            "N05": 0.19999999999999996,
-            "N06": 0.19999999999999996,
-            "N07": 0.19999999999999996,
-            "N08": 0.19999999999999996,
-            "N09": 0.19999999999999996,
-            "N10": 0.19999999999999996,
-            "N12": 0.44999999999999996,
-            "N13": 0.44999999999999996
-          },
-          "elegido": "N12",
-          "ganancia": 0.44999999999999996,
-          "f_acumulada": 12.55
-        },
-        {
-          "iteracion": 5,
-          "deltas": {
-            "N01": 0.19999999999999996,
-            "N02": 0.19999999999999996,
-            "N03": 0.19999999999999996,
-            "N04": 0.19999999999999996,
-            "N05": 0.19999999999999996,
-            "N06": 0.19999999999999996,
-            "N07": 0.19999999999999996,
-            "N08": 0.19999999999999996,
-            "N09": 0.19999999999999996,
-            "N10": 0.19999999999999996,
-            "N13": 0.44999999999999996
-          },
-          "elegido": "N13",
-          "ganancia": 0.44999999999999996,
-          "f_acumulada": 13.0
-        }
+      "iteracion": 2,
+      "deltas": {
+        "N01": 3,
+        "N02": 1,
+        "N04": 1,
+        "N05": 2,
+        "N06": 5,
+        "N07": 3,
+        "N08": 4,
+        "N09": 5,
+        "N10": 6,
+        "N11": 4,
+        "N12": 3,
+        "N13": 3,
+        "N14": 4,
+        "N15": 4
+      },
+      "elegido": "N10",
+      "ganancia": 6,
+      "nuevas": [
+        "C07",
+        "C09",
+        "C13",
+        "C14",
+        "C17",
+        "C20"
       ],
-      "reparto": [
-        {
-          "paso": 1,
-          "nodo": "N12",
-          "ganancia": 8.179136730607356,
-          "x_nodo": 1,
-          "proxima_ganancia": 4.78448827567634
-        },
-        {
-          "paso": 2,
-          "nodo": "N14",
-          "ganancia": 7.000786523655447,
-          "x_nodo": 1,
-          "proxima_ganancia": 4.095197591892462
-        },
-        {
-          "paso": 3,
-          "nodo": "N15",
-          "ganancia": 6.58489821531948,
-          "x_nodo": 1,
-          "proxima_ganancia": 3.8519185270275624
-        },
-        {
-          "paso": 4,
-          "nodo": "N13",
-          "ganancia": 5.753121598647547,
-          "x_nodo": 1,
-          "proxima_ganancia": 3.3653603972977644
-        },
-        {
-          "paso": 5,
-          "nodo": "N11",
-          "ganancia": 5.267918572255584,
-          "x_nodo": 1,
-          "proxima_ganancia": 3.081534821622049
-        },
-        {
-          "paso": 6,
-          "nodo": "N12",
-          "ganancia": 4.78448827567634,
-          "x_nodo": 2,
-          "proxima_ganancia": 3.3946484549310156
-        },
-        {
-          "paso": 7,
-          "nodo": "N14",
-          "ganancia": 4.095197591892462,
-          "x_nodo": 2,
-          "proxima_ganancia": 2.905588931762985
-        },
-        {
-          "paso": 8,
-          "nodo": "N15",
-          "ganancia": 3.8519185270275624,
-          "x_nodo": 2,
-          "proxima_ganancia": 2.732979688291918
-        },
-        {
-          "paso": 9,
-          "nodo": "N12",
-          "ganancia": 3.3946484549310156,
-          "x_nodo": 3,
-          "proxima_ganancia": 2.6330939055076747
-        },
-        {
-          "paso": 10,
-          "nodo": "N13",
-          "ganancia": 3.3653603972977644,
-          "x_nodo": 2,
-          "proxima_ganancia": 2.3877612013497824
-        },
-        {
-          "paso": 11,
-          "nodo": "N11",
-          "ganancia": 3.081534821622049,
-          "x_nodo": 2,
-          "proxima_ganancia": 2.186383750633535
-        },
-        {
-          "paso": 12,
-          "nodo": "N14",
-          "ganancia": 2.905588931762985,
-          "x_nodo": 3,
-          "proxima_ganancia": 2.253749868273518
-        },
-        {
-          "paso": 13,
-          "nodo": "N15",
-          "ganancia": 2.732979688291918,
-          "x_nodo": 3,
-          "proxima_ganancia": 2.1198637374849927
-        },
-        {
-          "paso": 14,
-          "nodo": "N12",
-          "ganancia": 2.6330939055076747,
-          "x_nodo": 4,
-          "proxima_ganancia": 2.1513943701686635
-        },
-        {
-          "paso": 15,
-          "nodo": "N13",
-          "ganancia": 2.3877612013497824,
-          "x_nodo": 3,
-          "proxima_ganancia": 1.8520914759079403
-        },
-        {
-          "paso": 16,
-          "nodo": "N14",
-          "ganancia": 2.253749868273518,
-          "x_nodo": 4,
-          "proxima_ganancia": 1.8414477236189413
-        },
-        {
-          "paso": 17,
-          "nodo": "N11",
-          "ganancia": 2.186383750633535,
-          "x_nodo": 3,
-          "proxima_ganancia": 1.6958909899879941
-        },
-        {
-          "paso": 18,
-          "nodo": "N12",
-          "ganancia": 2.1513943701686635,
-          "x_nodo": 5,
-          "proxima_ganancia": 1.818978021961648
-        },
-        {
-          "paso": 19,
-          "nodo": "N15",
-          "ganancia": 2.1198637374849927,
-          "x_nodo": 4,
-          "proxima_ganancia": 1.732054789542568
-        },
-        {
-          "paso": 20,
-          "nodo": "N13",
-          "ganancia": 1.8520914759079403,
-          "x_nodo": 4,
-          "proxima_ganancia": 1.5132689213898232
-        },
-        {
-          "paso": 21,
-          "nodo": "N14",
-          "ganancia": 1.8414477236189413,
-          "x_nodo": 5,
-          "proxima_ganancia": 1.556921866255312
-        },
-        {
-          "paso": 22,
-          "nodo": "N12",
-          "ganancia": 1.818978021961648,
-          "x_nodo": 6,
-          "proxima_ganancia": 1.575670432969364
-        },
-        {
-          "paso": 23,
-          "nodo": "N15",
-          "ganancia": 1.732054789542568,
-          "x_nodo": 5,
-          "proxima_ganancia": 1.4644314583589555
-        },
-        {
-          "paso": 24,
-          "nodo": "N11",
-          "ganancia": 1.6958909899879941,
-          "x_nodo": 4,
-          "proxima_ganancia": 1.385643831634054
-        },
-        {
-          "paso": 25,
-          "nodo": "N12",
-          "ganancia": 1.575670432969364,
-          "x_nodo": 7,
-          "proxima_ganancia": 1.3898398207453297
-        },
-        {
-          "paso": 26,
-          "nodo": "N14",
-          "ganancia": 1.556921866255312,
-          "x_nodo": 6,
-          "proxima_ganancia": 1.3486670655076765
-        },
-        {
-          "paso": 27,
-          "nodo": "N13",
-          "ganancia": 1.5132689213898232,
-          "x_nodo": 5,
-          "proxima_ganancia": 1.2794506425662444
-        },
-        {
-          "paso": 28,
-          "nodo": "N15",
-          "ganancia": 1.4644314583589555,
-          "x_nodo": 6,
-          "proxima_ganancia": 1.2685482299329642
-        },
-        {
-          "paso": 29,
-          "nodo": "N12",
-          "ganancia": 1.3898398207453297,
-          "x_nodo": 8,
-          "proxima_ganancia": 1.243254084762352
-        },
-        {
-          "paso": 30,
-          "nodo": "N11",
-          "ganancia": 1.385643831634054,
-          "x_nodo": 5,
-          "proxima_ganancia": 1.1715451666871637
-        }
-      ],
-      "verificacion": [
-        {
-          "nombre": "|A| = k",
-          "esperado": 5,
-          "obtenido": 5,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "nodos de A distintos y válidos",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "f(A) de la traza = f(A) recalculada desde cero",
-          "esperado": 13.0,
-          "obtenido": 13.0,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "ganancias marginales de la selección no crecientes (submodularidad)",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "sum(x) = B",
-          "esperado": 30,
-          "obtenido": 30,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "x_i entero >= 0",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "ganancias del reparto no crecientes (concavidad)",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "reparto óptimo: ninguna transferencia de 1 unidad mejora la utilidad",
-          "esperado": "<= 0",
-          "obtenido": "0.000e+00",
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "garantía f(voraz) >= (1-1/e) f(óptimo)",
-          "esperado": ">= 8.2176",
-          "obtenido": "13.0000",
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "costo de participación de A <= presupuesto de costos (la base no lo impone)",
-          "esperado": "<= 24",
-          "obtenido": 25,
-          "cumple": false,
-          "tipo": "informativa"
-        },
-        {
-          "nombre": "consumo acumulado por nodo <= presupuesto_total_nodo (la base no lo impone)",
-          "esperado": "sin excesos",
-          "obtenido": "sin excesos",
-          "cumple": true,
-          "tipo": "informativa"
-        }
-      ]
+      "f_acumulada": 13
     },
     {
-      "ronda": 3,
-      "seleccion": [
-        {
-          "iteracion": 1,
-          "deltas": {
-            "N01": 7.75,
-            "N02": 7.75,
-            "N03": 8.1,
-            "N04": 7.5,
-            "N05": 8.55,
-            "N06": 7.35,
-            "N07": 9.1,
-            "N08": 7.300000000000001,
-            "N09": 9.75,
-            "N10": 7.3500000000000005,
-            "N11": 10.5,
-            "N12": 7.5,
-            "N13": 4.2,
-            "N14": 8.4,
-            "N15": 4.5
-          },
-          "elegido": "N11",
-          "ganancia": 10.5,
-          "f_acumulada": 10.5
-        },
-        {
-          "iteracion": 2,
-          "deltas": {
-            "N01": 0.19999999999999996,
-            "N02": 0.19999999999999996,
-            "N03": 0.19999999999999996,
-            "N04": 0.19999999999999996,
-            "N05": 0.19999999999999996,
-            "N06": 0.19999999999999996,
-            "N07": 0.19999999999999996,
-            "N08": 0.19999999999999996,
-            "N09": 0.19999999999999996,
-            "N10": 0.19999999999999996,
-            "N12": 0.5,
-            "N13": 0.8,
-            "N14": 0.8500000000000001,
-            "N15": 0.8
-          },
-          "elegido": "N14",
-          "ganancia": 0.8500000000000001,
-          "f_acumulada": 11.350000000000001
-        },
-        {
-          "iteracion": 3,
-          "deltas": {
-            "N01": 0.19999999999999996,
-            "N02": 0.19999999999999996,
-            "N03": 0.19999999999999996,
-            "N04": 0.19999999999999996,
-            "N05": 0.19999999999999996,
-            "N06": 0.19999999999999996,
-            "N07": 0.19999999999999996,
-            "N08": 0.19999999999999996,
-            "N09": 0.19999999999999996,
-            "N10": 0.19999999999999996,
-            "N12": 0.44999999999999996,
-            "N13": 0.44999999999999996,
-            "N15": 0.75
-          },
-          "elegido": "N15",
-          "ganancia": 0.75,
-          "f_acumulada": 12.100000000000001
-        },
-        {
-          "iteracion": 4,
-          "deltas": {
-            "N01": 0.19999999999999996,
-            "N02": 0.19999999999999996,
-            "N03": 0.19999999999999996,
-            "N04": 0.19999999999999996,
-            "N05": 0.19999999999999996,
-            "N06": 0.19999999999999996,
-            "N07": 0.19999999999999996,
-            "N08": 0.19999999999999996,
-            "N09": 0.19999999999999996,
-            "N10": 0.19999999999999996,
-            "N12": 0.44999999999999996,
-            "N13": 0.44999999999999996
-          },
-          "elegido": "N12",
-          "ganancia": 0.44999999999999996,
-          "f_acumulada": 12.55
-        },
-        {
-          "iteracion": 5,
-          "deltas": {
-            "N01": 0.19999999999999996,
-            "N02": 0.19999999999999996,
-            "N03": 0.19999999999999996,
-            "N04": 0.19999999999999996,
-            "N05": 0.19999999999999996,
-            "N06": 0.19999999999999996,
-            "N07": 0.19999999999999996,
-            "N08": 0.19999999999999996,
-            "N09": 0.19999999999999996,
-            "N10": 0.19999999999999996,
-            "N13": 0.44999999999999996
-          },
-          "elegido": "N13",
-          "ganancia": 0.44999999999999996,
-          "f_acumulada": 13.0
-        }
+      "iteracion": 3,
+      "deltas": {
+        "N01": 2,
+        "N02": 0,
+        "N04": 1,
+        "N05": 1,
+        "N06": 3,
+        "N07": 2,
+        "N08": 4,
+        "N09": 2,
+        "N11": 2,
+        "N12": 1,
+        "N13": 3,
+        "N14": 1,
+        "N15": 1
+      },
+      "elegido": "N08",
+      "ganancia": 4,
+      "nuevas": [
+        "C05",
+        "C06",
+        "C12",
+        "C19"
       ],
-      "reparto": [
-        {
-          "paso": 1,
-          "nodo": "N12",
-          "ganancia": 8.179136730607356,
-          "x_nodo": 1,
-          "proxima_ganancia": 4.78448827567634
-        },
-        {
-          "paso": 2,
-          "nodo": "N14",
-          "ganancia": 7.000786523655447,
-          "x_nodo": 1,
-          "proxima_ganancia": 4.095197591892462
-        },
-        {
-          "paso": 3,
-          "nodo": "N15",
-          "ganancia": 6.58489821531948,
-          "x_nodo": 1,
-          "proxima_ganancia": 3.8519185270275624
-        },
-        {
-          "paso": 4,
-          "nodo": "N13",
-          "ganancia": 5.753121598647547,
-          "x_nodo": 1,
-          "proxima_ganancia": 3.3653603972977644
-        },
-        {
-          "paso": 5,
-          "nodo": "N11",
-          "ganancia": 5.267918572255584,
-          "x_nodo": 1,
-          "proxima_ganancia": 3.081534821622049
-        },
-        {
-          "paso": 6,
-          "nodo": "N12",
-          "ganancia": 4.78448827567634,
-          "x_nodo": 2,
-          "proxima_ganancia": 3.3946484549310156
-        },
-        {
-          "paso": 7,
-          "nodo": "N14",
-          "ganancia": 4.095197591892462,
-          "x_nodo": 2,
-          "proxima_ganancia": 2.905588931762985
-        },
-        {
-          "paso": 8,
-          "nodo": "N15",
-          "ganancia": 3.8519185270275624,
-          "x_nodo": 2,
-          "proxima_ganancia": 2.732979688291918
-        },
-        {
-          "paso": 9,
-          "nodo": "N12",
-          "ganancia": 3.3946484549310156,
-          "x_nodo": 3,
-          "proxima_ganancia": 2.6330939055076747
-        },
-        {
-          "paso": 10,
-          "nodo": "N13",
-          "ganancia": 3.3653603972977644,
-          "x_nodo": 2,
-          "proxima_ganancia": 2.3877612013497824
-        },
-        {
-          "paso": 11,
-          "nodo": "N11",
-          "ganancia": 3.081534821622049,
-          "x_nodo": 2,
-          "proxima_ganancia": 2.186383750633535
-        },
-        {
-          "paso": 12,
-          "nodo": "N14",
-          "ganancia": 2.905588931762985,
-          "x_nodo": 3,
-          "proxima_ganancia": 2.253749868273518
-        },
-        {
-          "paso": 13,
-          "nodo": "N15",
-          "ganancia": 2.732979688291918,
-          "x_nodo": 3,
-          "proxima_ganancia": 2.1198637374849927
-        },
-        {
-          "paso": 14,
-          "nodo": "N12",
-          "ganancia": 2.6330939055076747,
-          "x_nodo": 4,
-          "proxima_ganancia": 2.1513943701686635
-        },
-        {
-          "paso": 15,
-          "nodo": "N13",
-          "ganancia": 2.3877612013497824,
-          "x_nodo": 3,
-          "proxima_ganancia": 1.8520914759079403
-        },
-        {
-          "paso": 16,
-          "nodo": "N14",
-          "ganancia": 2.253749868273518,
-          "x_nodo": 4,
-          "proxima_ganancia": 1.8414477236189413
-        },
-        {
-          "paso": 17,
-          "nodo": "N11",
-          "ganancia": 2.186383750633535,
-          "x_nodo": 3,
-          "proxima_ganancia": 1.6958909899879941
-        },
-        {
-          "paso": 18,
-          "nodo": "N12",
-          "ganancia": 2.1513943701686635,
-          "x_nodo": 5,
-          "proxima_ganancia": 1.818978021961648
-        },
-        {
-          "paso": 19,
-          "nodo": "N15",
-          "ganancia": 2.1198637374849927,
-          "x_nodo": 4,
-          "proxima_ganancia": 1.732054789542568
-        },
-        {
-          "paso": 20,
-          "nodo": "N13",
-          "ganancia": 1.8520914759079403,
-          "x_nodo": 4,
-          "proxima_ganancia": 1.5132689213898232
-        },
-        {
-          "paso": 21,
-          "nodo": "N14",
-          "ganancia": 1.8414477236189413,
-          "x_nodo": 5,
-          "proxima_ganancia": 1.556921866255312
-        },
-        {
-          "paso": 22,
-          "nodo": "N12",
-          "ganancia": 1.818978021961648,
-          "x_nodo": 6,
-          "proxima_ganancia": 1.575670432969364
-        },
-        {
-          "paso": 23,
-          "nodo": "N15",
-          "ganancia": 1.732054789542568,
-          "x_nodo": 5,
-          "proxima_ganancia": 1.4644314583589555
-        },
-        {
-          "paso": 24,
-          "nodo": "N11",
-          "ganancia": 1.6958909899879941,
-          "x_nodo": 4,
-          "proxima_ganancia": 1.385643831634054
-        },
-        {
-          "paso": 25,
-          "nodo": "N12",
-          "ganancia": 1.575670432969364,
-          "x_nodo": 7,
-          "proxima_ganancia": 1.3898398207453297
-        },
-        {
-          "paso": 26,
-          "nodo": "N14",
-          "ganancia": 1.556921866255312,
-          "x_nodo": 6,
-          "proxima_ganancia": 1.3486670655076765
-        },
-        {
-          "paso": 27,
-          "nodo": "N13",
-          "ganancia": 1.5132689213898232,
-          "x_nodo": 5,
-          "proxima_ganancia": 1.2794506425662444
-        },
-        {
-          "paso": 28,
-          "nodo": "N15",
-          "ganancia": 1.4644314583589555,
-          "x_nodo": 6,
-          "proxima_ganancia": 1.2685482299329642
-        },
-        {
-          "paso": 29,
-          "nodo": "N12",
-          "ganancia": 1.3898398207453297,
-          "x_nodo": 8,
-          "proxima_ganancia": 1.243254084762352
-        },
-        {
-          "paso": 30,
-          "nodo": "N11",
-          "ganancia": 1.385643831634054,
-          "x_nodo": 5,
-          "proxima_ganancia": 1.1715451666871637
-        }
+      "f_acumulada": 17
+    },
+    {
+      "iteracion": 4,
+      "deltas": {
+        "N01": 1,
+        "N02": 0,
+        "N04": 1,
+        "N05": 1,
+        "N06": 1,
+        "N07": 1,
+        "N09": 2,
+        "N11": 1,
+        "N12": 1,
+        "N13": 2,
+        "N14": 0,
+        "N15": 0
+      },
+      "elegido": "N09",
+      "ganancia": 2,
+      "nuevas": [
+        "C03",
+        "C04"
       ],
-      "verificacion": [
-        {
-          "nombre": "|A| = k",
-          "esperado": 5,
-          "obtenido": 5,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "nodos de A distintos y válidos",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "f(A) de la traza = f(A) recalculada desde cero",
-          "esperado": 13.0,
-          "obtenido": 13.0,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "ganancias marginales de la selección no crecientes (submodularidad)",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "sum(x) = B",
-          "esperado": 30,
-          "obtenido": 30,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "x_i entero >= 0",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "ganancias del reparto no crecientes (concavidad)",
-          "esperado": true,
-          "obtenido": true,
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "reparto óptimo: ninguna transferencia de 1 unidad mejora la utilidad",
-          "esperado": "<= 0",
-          "obtenido": "0.000e+00",
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "garantía f(voraz) >= (1-1/e) f(óptimo)",
-          "esperado": ">= 8.2176",
-          "obtenido": "13.0000",
-          "cumple": true,
-          "tipo": "obligatoria"
-        },
-        {
-          "nombre": "costo de participación de A <= presupuesto de costos (la base no lo impone)",
-          "esperado": "<= 24",
-          "obtenido": 25,
-          "cumple": false,
-          "tipo": "informativa"
-        },
-        {
-          "nombre": "consumo acumulado por nodo <= presupuesto_total_nodo (la base no lo impone)",
-          "esperado": "sin excesos",
-          "obtenido": "excede: N12",
-          "cumple": false,
-          "tipo": "informativa"
-        }
-      ]
+      "f_acumulada": 19
+    },
+    {
+      "iteracion": 5,
+      "deltas": {
+        "N01": 1,
+        "N02": 0,
+        "N04": 0,
+        "N05": 1,
+        "N06": 0,
+        "N07": 0,
+        "N11": 0,
+        "N12": 0,
+        "N13": 1,
+        "N14": 0,
+        "N15": 0
+      },
+      "elegido": "N01",
+      "ganancia": 1,
+      "nuevas": [
+        "C11"
+      ],
+      "f_acumulada": 20
+    }
+  ],
+  "reparto": [
+    {
+      "paso": 1,
+      "nodo": "N10",
+      "ganancia": 8.595025038943321,
+      "x_nodo": 1,
+      "proxima_ganancia": 5.02776734054124
+    },
+    {
+      "paso": 2,
+      "nodo": "N08",
+      "ganancia": 7.347360113935419,
+      "x_nodo": 1,
+      "proxima_ganancia": 4.297930145946545
+    },
+    {
+      "paso": 3,
+      "nodo": "N09",
+      "ganancia": 6.8621570875434585,
+      "x_nodo": 1,
+      "proxima_ganancia": 4.014104570270829
+    },
+    {
+      "paso": 4,
+      "nodo": "N03",
+      "ganancia": 6.307639343095502,
+      "x_nodo": 1,
+      "proxima_ganancia": 3.6897324837842955
+    },
+    {
+      "paso": 5,
+      "nodo": "N01",
+      "ganancia": 5.891751034759535,
+      "x_nodo": 1,
+      "proxima_ganancia": 3.4464534189193987
+    },
+    {
+      "paso": 6,
+      "nodo": "N10",
+      "ganancia": 5.02776734054124,
+      "x_nodo": 2,
+      "proxima_ganancia": 3.5672576984020807
+    },
+    {
+      "paso": 7,
+      "nodo": "N08",
+      "ganancia": 4.297930145946545,
+      "x_nodo": 2,
+      "proxima_ganancia": 3.049429967988875
+    },
+    {
+      "paso": 8,
+      "nodo": "N09",
+      "ganancia": 4.014104570270829,
+      "x_nodo": 2,
+      "proxima_ganancia": 2.848052517272629
+    },
+    {
+      "paso": 9,
+      "nodo": "N03",
+      "ganancia": 3.6897324837842955,
+      "x_nodo": 2,
+      "proxima_ganancia": 2.6179068593112067
+    },
+    {
+      "paso": 10,
+      "nodo": "N10",
+      "ganancia": 3.5672576984020807,
+      "x_nodo": 3,
+      "proxima_ganancia": 2.7669800362962
+    },
+    {
+      "paso": 11,
+      "nodo": "N01",
+      "ganancia": 3.4464534189193987,
+      "x_nodo": 2,
+      "proxima_ganancia": 2.4452976158401363
+    },
+    {
+      "paso": 12,
+      "nodo": "N08",
+      "ganancia": 3.049429967988875,
+      "x_nodo": 3,
+      "proxima_ganancia": 2.365321643930624
+    },
+    {
+      "paso": 13,
+      "nodo": "N09",
+      "ganancia": 2.848052517272629,
+      "x_nodo": 3,
+      "proxima_ganancia": 2.209121158010676
+    },
+    {
+      "paso": 14,
+      "nodo": "N10",
+      "ganancia": 2.7669800362962,
+      "x_nodo": 4,
+      "proxima_ganancia": 2.2607873042450386
+    },
+    {
+      "paso": 15,
+      "nodo": "N03",
+      "ganancia": 2.6179068593112067,
+      "x_nodo": 3,
+      "proxima_ganancia": 2.0306063169593074
+    },
+    {
+      "paso": 16,
+      "nodo": "N01",
+      "ganancia": 2.4452976158401363,
+      "x_nodo": 3,
+      "proxima_ganancia": 1.896720186170782
+    },
+    {
+      "paso": 17,
+      "nodo": "N08",
+      "ganancia": 2.365321643930624,
+      "x_nodo": 4,
+      "proxima_ganancia": 1.9326085020159205
+    },
+    {
+      "paso": 18,
+      "nodo": "N10",
+      "ganancia": 2.2607873042450386,
+      "x_nodo": 5,
+      "proxima_ganancia": 1.9114684298580045
+    },
+    {
+      "paso": 19,
+      "nodo": "N09",
+      "ganancia": 2.209121158010676,
+      "x_nodo": 4,
+      "proxima_ganancia": 1.8049834122601514
+    },
+    {
+      "paso": 20,
+      "nodo": "N03",
+      "ganancia": 2.0306063169593074,
+      "x_nodo": 4,
+      "proxima_ganancia": 1.6591261668249864
+    },
+    {
+      "paso": 21,
+      "nodo": "N08",
+      "ganancia": 1.9326085020159205,
+      "x_nodo": 5,
+      "proxima_ganancia": 1.6339972061689352
+    },
+    {
+      "paso": 22,
+      "nodo": "N10",
+      "ganancia": 1.9114684298580045,
+      "x_nodo": 6,
+      "proxima_ganancia": 1.6557892685440798
+    },
+    {
+      "paso": 23,
+      "nodo": "N01",
+      "ganancia": 1.896720186170782,
+      "x_nodo": 4,
+      "proxima_ganancia": 1.5497332327486149
+    },
+    {
+      "paso": 24,
+      "nodo": "N09",
+      "ganancia": 1.8049834122601514,
+      "x_nodo": 5,
+      "proxima_ganancia": 1.5260917302898562
+    },
+    {
+      "paso": 25,
+      "nodo": "N03",
+      "ganancia": 1.6591261668249864,
+      "x_nodo": 5,
+      "proxima_ganancia": 1.4027711864280512
+    },
+    {
+      "paso": 26,
+      "nodo": "N10",
+      "ganancia": 1.6557892685440798,
+      "x_nodo": 7,
+      "proxima_ganancia": 1.460509642139158
+    },
+    {
+      "paso": 27,
+      "nodo": "N08",
+      "ganancia": 1.6339972061689352,
+      "x_nodo": 6,
+      "proxima_ganancia": 1.4154327618199396
+    },
+    {
+      "paso": 28,
+      "nodo": "N01",
+      "ganancia": 1.5497332327486149,
+      "x_nodo": 5,
+      "proxima_ganancia": 1.3102807785316948
+    },
+    {
+      "paso": 29,
+      "nodo": "N09",
+      "ganancia": 1.5260917302898562,
+      "x_nodo": 6,
+      "proxima_ganancia": 1.3219607869827747
+    },
+    {
+      "paso": 30,
+      "nodo": "N10",
+      "ganancia": 1.460509642139158,
+      "x_nodo": 8,
+      "proxima_ganancia": 1.3064703941570457
+    }
+  ],
+  "verificacion": [
+    {
+      "nombre": "tamaño de A = k",
+      "esperado": 5,
+      "obtenido": 5,
+      "cumple": true
+    },
+    {
+      "nombre": "nodos de A distintos y válidos",
+      "esperado": true,
+      "obtenido": true,
+      "cumple": true
+    },
+    {
+      "nombre": "f(A) de la traza = f(A) recalculada desde cero",
+      "esperado": 20,
+      "obtenido": 20,
+      "cumple": true
+    },
+    {
+      "nombre": "ganancias marginales de la selección no crecientes (submodularidad)",
+      "esperado": true,
+      "obtenido": true,
+      "cumple": true
+    },
+    {
+      "nombre": "selección idéntica a la implementación del informe (algoritmos.py)",
+      "esperado": [
+        2,
+        9,
+        7,
+        8,
+        0
+      ],
+      "obtenido": [
+        2,
+        9,
+        7,
+        8,
+        0
+      ],
+      "cumple": true
+    },
+    {
+      "nombre": "sum(x) = B",
+      "esperado": 30,
+      "obtenido": 30,
+      "cumple": true
+    },
+    {
+      "nombre": "x_i entero >= 0",
+      "esperado": true,
+      "obtenido": true,
+      "cumple": true
+    },
+    {
+      "nombre": "ganancias del reparto no crecientes (concavidad)",
+      "esperado": true,
+      "obtenido": true,
+      "cumple": true
+    },
+    {
+      "nombre": "reparto idéntico a la implementación del informe (algoritmos.py)",
+      "esperado": [
+        5,
+        8,
+        6,
+        6,
+        5
+      ],
+      "obtenido": [
+        5,
+        8,
+        6,
+        6,
+        5
+      ],
+      "cumple": true
+    },
+    {
+      "nombre": "reparto óptimo: ninguna transferencia de 1 unidad mejora la utilidad",
+      "esperado": "<= 0",
+      "obtenido": "0.000e+00",
+      "cumple": true
+    },
+    {
+      "nombre": "garantía f(voraz) >= (1-1/e) f(óptimo)",
+      "esperado": ">= 12.6424",
+      "obtenido": 20,
+      "cumple": true
     }
   ]
 }
