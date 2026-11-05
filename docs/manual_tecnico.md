@@ -1,6 +1,6 @@
 # Manual técnico — Solución base del Subproyecto 2 (versión 1.1.0)
 
-Contenido: 1. Problema · 2. Algoritmos · 3. Estructura del código · 4. Formato de entrada · 5. Formato de salida y traza · 6. Pasos de ejecución · 7. Verificación de restricciones · 8. Limitaciones · 9. Correspondencia con el informe
+Contenido: 1. Problema · 2. Algoritmos · 3. Explicación del código · 4. Formato de entrada · 5. Formato de salida y traza · 6. Pasos de ejecución · 7. Verificación de restricciones · 8. Limitaciones · 9. Correspondencia con el informe
 
 ## 1. Problema
 
@@ -57,19 +57,183 @@ repetir B veces:
 
 Es **exacto** (teorema de optimalidad del informe). Costo `O(k + B·log k)` sobre los `k` nodos seleccionados (pseudo-polinomial en `B`).
 
-## 3. Estructura del código
+## 3. Explicación del código
+
+Esta sección recorre el código real, en el orden en que se ejecuta, y lo conecta con los algoritmos de la sección 2. Los números de los ejemplos salen del caso incluido (`casos/entrada_G2_red_15_nodos.json`) y se pueden comprobar en `resultados/entrada_G2_red_15_nodos/traza.md`.
+
+### 3.1 Qué hace cada archivo
 
 | Archivo | Responsabilidad |
 |---|---|
-| `src/entrada.py` | Lee y valida el JSON; construye `Caso` con las categorías de cada nodo como conjuntos. Lanza `ValueError` con mensaje claro si algo es inválido. |
-| `src/utilidades.py` | Catálogo y validación de las funciones `u_i(x)`. |
-| `src/solucion.py` | `seleccion_voraz_traza`, `reparto_voraz_traza`, `seleccion_exacta_ref` (fuerza bruta de referencia si `C(N,k) ≤ 2·10⁶`), `f_cobertura` y `resolver`. Con `traza=None` no registra nada: las decisiones son las mismas con o sin traza. |
+| `src/ejecutar_casos.py` | **Programa principal.** Lee los argumentos, recorre los casos, mide el tiempo, llama a la solución y escribe `resultados/`. |
+| `src/entrada.py` | Lee y valida el JSON; construye el objeto `Caso`. Lanza `ValueError` con mensaje claro si algo es inválido. |
+| `src/solucion.py` | **El núcleo.** Los dos algoritmos voraces (`seleccion_voraz_traza`, `reparto_voraz_traza`), la utilidad `f_cobertura`, el óptimo de referencia `seleccion_exacta_ref` (fuerza bruta, solo si `C(N,k) ≤ 2·10⁶`) y `resolver`, que los une. |
+| `src/utilidades.py` | Catálogo de funciones `u_i(x)` y su validación. |
 | `src/verificacion.py` | Chequeos de restricciones (§7), incluida la comparación con `Informe/code/algoritmos.py`. |
-| `src/ejecutar_casos.py` | Programa principal: recorre casos, mide tiempo, escribe `resultados/`. |
-| `src/generar_categorias.py` | Agrega categorías sintéticas reproducibles a un caso que no las trae. |
-| `Informe/code/algoritmos.py` | Implementación del informe. En cada ejecución se contrasta con ella la selección y el reparto. |
+| `src/generar_categorias.py` | Herramienta aparte: agrega categorías sintéticas reproducibles a un caso que no las trae. |
+| `Informe/code/algoritmos.py` | Implementación del informe. No la usa la solución; solo se contrasta con ella en cada ejecución. |
 
-La lógica del algoritmo no se edita para ejecutar un caso: todo cambio de datos se hace en el JSON y todo cambio de salida en las opciones de la línea de comandos.
+La lógica del algoritmo no se edita para ejecutar un caso: los datos se cambian en el JSON y la salida con las opciones de la línea de comandos.
+
+### 3.2 Flujo completo de una ejecución
+
+```
+python src/ejecutar_casos.py
+        │
+        ▼
+ main()                          lee argumentos y lista los .json de casos/
+        │   (por cada caso)
+        ▼
+ ejecutar_caso(ruta)
+   ├─ cargar(ruta)               entrada.py   → objeto Caso (valida todo)
+   ├─ medir(caso)                resolver() varias veces SIN traza → mediana de tiempo
+   ├─ seleccion_exacta_ref()     óptimo por fuerza bruta (si C(N,k) es pequeño)
+   ├─ resolver(caso, trazas)     solucion.py  → selección + reparto, CON traza
+   │     ├─ seleccion_voraz_traza(S, k)          elige los k nodos
+   │     └─ reparto_voraz_traza(w, B, spec)      reparte B entre los elegidos
+   └─ verificar(...)             verificacion.py → lista de chequeos
+        │
+        ▼
+ escribir(...)                   salida.json, traza.json, traza.md
+        │
+        ▼
+ resumen.md  +  código de salida (0 si todo cumple, 1 si no)
+```
+
+La **medición de tiempo** usa `resolver` sin traza ni verificación: así el tiempo es el del algoritmo y no el de escribir la traza. La **traza** se obtiene en una ejecución aparte con las mismas entradas; como el algoritmo es determinista, produce las mismas decisiones.
+
+### 3.3 Los datos: del JSON a las estructuras de Python
+
+`cargar` convierte el JSON en un `Caso` (dataclass en `entrada.py`). Los nodos se identifican **por su posición** 0..N−1 en el archivo; los ids (`"N01"`) solo se usan para mostrar resultados.
+
+| En el informe | En el código | Contenido |
+|---|---|---|
+| `N`, `k`, `B` | `caso.N`, `caso.k`, `caso.B` | enteros |
+| `S_j` (categorías del nodo j) | `caso.S[j]` | `set` de textos, p. ej. `{"C11","C17","C19"}` |
+| `w_i` (coeficiente de utilidad) | `caso.coef[i]` | `float` |
+| `u_i` | `caso.utilidad` | especificación, p. ej. `{"tipo": "log"}` |
+| id del nodo j | `caso.ids[j]` | `"N01"`, ... |
+
+Se usa `set` para las categorías porque la operación central, «qué categorías de `S_j` aún no están cubiertas», es una resta de conjuntos (`S[j] - cubierto`) que cuesta `O(|S_j|)`.
+
+### 3.4 Selección: `seleccion_voraz_traza` (`src/solucion.py`)
+
+Implementa el Algoritmo 3 del informe. Sin las líneas de traza, el núcleo es:
+
+```python
+N = len(S)
+A, en_A, cubierto = [], [False] * N, set()
+for it in range(1, k + 1):                  # una vuelta por cada lugar del cupo
+    mejor, mejor_delta = None, -1
+    for j in range(N):
+        if en_A[j]:                         # ya elegido: no es candidato
+            continue
+        delta = len(S[j] - cubierto)        # Δ_j: categorías de j que faltan por cubrir
+        if delta > mejor_delta:             # '>' estricto: en empate gana el menor índice
+            mejor, mejor_delta = j, delta
+    A.append(mejor)
+    en_A[mejor] = True
+    cubierto |= S[mejor]                    # ahora esas categorías ya están cubiertas
+return A, len(cubierto)                     # f(A) = categorías cubiertas
+```
+
+| Variable | Significado |
+|---|---|
+| `A` | nodos elegidos hasta ahora, en orden de elección |
+| `en_A[j]` | `True` si el nodo j ya está en `A` (consulta en `O(1)`) |
+| `cubierto` | unión de las categorías de los nodos de `A`; su tamaño es `f(A)` |
+| `delta` | ganancia marginal `Δ_j = f(A ∪ {j}) − f(A)` |
+
+Por qué `len(S[j] - cubierto)` es la ganancia marginal: `f(A ∪ {j}) − f(A)` es la cantidad de categorías que `j` agrega, y esas son exactamente las de `S[j]` que no están en `cubierto`.
+
+**Ejemplo con el caso incluido.** Iteración 1, con `cubierto` vacío, el Δ de cada nodo es simplemente `|S_j|`. Cuatro nodos empatan con 7: N03, N10, N11 y N15. Como la comparación es `>` estricto, el primero que se recorre (N03) se queda y los demás no lo superan. N03 aporta C01, C02, C08, C10, C15, C16 y C18, y `cubierto` pasa a tener 7 categorías.
+
+Iteración 2: ahora Δ cuenta solo lo que falta. N10 tiene 7 categorías pero C16 ya está cubierta, así que Δ = 6. N11 también tenía 7 y ahora solo aporta 4, porque C01, C08 y C16 ya estaban. Gana N10 con 6. Por eso un nodo con muchas categorías puede dejar de ser atractivo: lo que cuenta es lo que **aporta de nuevo**.
+
+**Trazabilidad.** Si se pasa una lista `traza`, en cada iteración se guarda un diccionario con el Δ de **todos** los candidatos (`deltas`), el elegido, su Δ (`ganancia`), las categorías que aporta (`nuevas`) y `f(A)` acumulada. Esas líneas solo leen; no cambian ninguna decisión. Eso es lo que se imprime en la tabla de selección de `traza.md`.
+
+**Costo.** Hay `k` vueltas, `N` candidatos por vuelta y cada resta de conjuntos cuesta `O(s)`, con `s = máx |S_j|`: **`O(k·N·s)`**.
+
+### 3.5 Reparto: `reparto_voraz_traza` (`src/solucion.py`)
+
+Implementa el Algoritmo 1 del informe: entrega el presupuesto **de una unidad en una unidad** al nodo elegido cuya siguiente unidad aporta más.
+
+```python
+u = construir(spec, w)                       # u(i, x): utilidad del nodo i con x unidades
+g = lambda i, x: u(i, x + 1) - u(i, x)       # ganancia marginal de darle su unidad x+1
+x = [0] * n                                  # unidades de cada nodo elegido
+H = [(-g(i, 0), i) for i in range(n)]        # montículo con la 1.ª ganancia de cada nodo
+heapq.heapify(H)
+for paso in range(1, B + 1):                 # una vuelta por cada unidad de presupuesto
+    neg, i = heapq.heappop(H)                # nodo con mayor ganancia (guardada con signo -)
+    x[i] += 1                                # se le entrega una unidad
+    heapq.heappush(H, (-g(i, x[i]), i))      # entra su siguiente ganancia, que es menor
+return x
+```
+
+- **Por qué `-g`:** `heapq` de Python es un montículo de **mínimos**; al guardar la ganancia con signo negativo, `heappop` entrega la mayor ganancia.
+- **Por qué la tupla `(-g, i)`:** si dos nodos empatan en ganancia, Python compara el segundo elemento y gana el de menor índice, como en la selección.
+- **Por qué es óptimo:** cada `u_i` es cóncava, así que las ganancias de un mismo nodo solo bajan; tomar siempre la mayor disponible nunca se arrepiente (teorema de optimalidad del informe).
+- **Por qué el montículo:** sacar el máximo cuesta `O(log k)` y no hay que revisar a todos los nodos en cada paso.
+
+**Ejemplo con el caso incluido.** Los 5 elegidos son N03, N10, N08, N09 y N01, con `w` = 9.1, 12.4, 10.6, 9.9 y 8.5. Con `u = w·ln(1+x)`, la primera unidad de cada uno vale `w·ln 2`: 8.595 para N10, 7.347 para N08, 6.862 para N09, 6.308 para N03 y 5.892 para N01. Los pasos 1 a 5 entregan una unidad a cada uno, de mayor a menor ganancia. Al dar la primera unidad a N10, su siguiente ganancia baja a 5.028 (`12.4·(ln 3 − ln 2)`). En el paso 6 esa ganancia sigue siendo la mayor disponible (la siguiente es 4.298, de N08), así que N10 recibe su segunda unidad. Al terminar las 30 unidades, el reparto es N03=5, N10=8, N08=6, N09=6, N01=5.
+
+**Costo.** Construir el montículo cuesta `O(k)` y cada una de las `B` vueltas `O(log k)`: **`O(k + B·log k)`**. Es pseudo-polinomial: depende del **valor** de `B`.
+
+### 3.6 Funciones de utilidad: `src/utilidades.py`
+
+`u_i(x)` no está escrita dentro del algoritmo: el reparto la recibe como una función `u(i, x)`.
+
+```python
+def _saturacion(w, spec):
+    return lambda i, x: w[i] * x / (1 + x)
+
+FUNCIONES = {"log": _log, "sqrt": _sqrt, "saturacion": _saturacion, "potencia": _potencia}
+```
+
+- Cada tipo es una **fábrica**: recibe los coeficientes `w` y devuelve la función `u(i, x)`, que cuesta `O(1)` por llamada.
+- `validar(spec)` rechaza tipos desconocidos y, para `potencia`, exponentes fuera de (0, 1), porque con `p ≥ 1` la función dejaría de ser cóncava y el voraz ya no sería óptimo.
+- `construir(spec, w)` valida y devuelve la función. `solucion.py` solo llama a `construir`, así que agregar una función nueva no toca el algoritmo.
+
+### 3.7 Entrada y validación: `src/entrada.py`
+
+`cargar(ruta, utilidad=None)` hace tres cosas, en este orden:
+
+1. Lee el JSON y comprueba que existan `parametros` y `nodos`, y los tres parámetros obligatorios.
+2. Valida los valores: `numero_nodos` igual a la cantidad de nodos, ids únicos, `1 ≤ k < N`, `B` entero ≥ 0, coeficientes > 0 y categorías presentes y no vacías.
+3. Convierte las categorías a conjuntos y devuelve el `Caso`.
+
+Todo error es un `ValueError` que **nombra el caso**; `main` lo atrapa y lo muestra como una línea, sin traceback. Las claves que no conoce (`grafo`, `numero_rondas`, costos...) se ignoran.
+
+### 3.8 Verificación: `src/verificacion.py`
+
+`verificar(...)` recibe el resultado y las trazas y devuelve una lista de chequeos `{nombre, esperado, obtenido, cumple}`. Hay dos clases:
+
+- **Consistencia interna.** Por ejemplo, `f(A)` de la traza se compara con `f_cobertura(S, A)` recalculada desde cero, y las ganancias de la traza deben ser no crecientes.
+- **Contraste con el informe.** Se ejecutan `algoritmos.seleccion_voraz` y `algoritmos.reparto_voraz` de `Informe/code/algoritmos.py` con las mismas entradas y se exige el mismo resultado. Es la evidencia automática de que el código entregado corresponde al algoritmo del informe.
+
+La optimalidad del reparto se comprueba probando todas las transferencias de **una** unidad de un nodo a otro: si alguna mejorara la utilidad, el reparto no sería óptimo.
+
+### 3.9 Ejecución y salida: `src/ejecutar_casos.py`
+
+| Función | Qué hace |
+|---|---|
+| `main` | Interpreta los argumentos (`-r`, `-o`, `--utilidad`, `--exponente`), recorre los casos y escribe `resumen.md`. Termina con código 0 o 1. |
+| `ejecutar_caso` | Orquesta un caso (diagrama de §3.2) y cambia los índices por ids para la salida. |
+| `medir` | Ejecuta `resolver` `-r` veces y devuelve la mediana con `time.perf_counter`. |
+| `escribir` | Escribe `salida.json` y `traza.json`, y llama a `traza_md`. |
+| `traza_md` | Construye el Markdown legible de la traza. |
+| `version` | Lee el archivo `VERSION` para estampar la versión en todas las salidas. |
+
+### 3.10 Cómo modificar o ampliar
+
+| Quiero... | Qué tocar |
+|---|---|
+| Otra utilidad `u_i(x)` | Agregar una fábrica a `FUNCIONES` y `DESCRIPCION` en `utilidades.py`. No se toca el algoritmo. |
+| Otra definición de `f(A)` | Cambiar `f_cobertura` y la línea `delta = len(S[j] - cubierto)` de `seleccion_voraz_traza`; adaptar `nuevas` y `f_acumulada` de la traza. |
+| Otro campo de entrada | Leerlo y validarlo en `cargar` y guardarlo en `Caso`. |
+| Otro chequeo | Agregar un `cs.append(_chk(...))` en `verificar`. |
+| Otro formato de salida | `escribir` y `traza_md`. |
 
 ## 4. Formato de entrada (JSON)
 
