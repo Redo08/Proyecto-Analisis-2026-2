@@ -1,0 +1,3 @@
+# Solo para regenerar las gráficas del informe (Informe/code/experimentos.py).
+# La ejecución de los casos no necesita instalar nada.
+matplotlib>=3.8
