@@ -141,7 +141,7 @@ Como $\sum_i x_i(\lambda)$ es decreciente en $\lambda$, el nivel se encuentra or
 
 Como \SEL{} es NP-difícil (Sección~\ref{sec:reduccion}), no se conoce un algoritmo exacto polinomial. El algoritmo exacto natural recorre el árbol de decisiones ``incluir / no incluir'' cada nodo.
 
-\emph{Nota:} en esta entrega el algoritmo exacto se implementó por fuerza bruta; en la próxima entrega se reemplazará por una solución con programación dinámica.
+\emph{Nota:} en esta entrega el algoritmo exacto se implementó por fuerza bruta; en la próxima entrega se reemplazará por una solución con programación dinámica. Como su costo es exponencial, solo es viable para pocos nodos; esta limitación es conocida y es la que se resolverá en la próxima entrega.
 
 \begin{algorithm}[H]
 \caption{\textsc{SelecciónExacta}$(V, f, k)$}\label{alg:exacto}
