@@ -126,11 +126,10 @@ A, en_A, cubierto = [], [False] * N, set()
 for it in range(1, k + 1):                  # una vuelta por cada lugar del cupo
     mejor, mejor_delta = None, -1
     for j in range(N):
-        if en_A[j]:                         # ya elegido: no es candidato
-            continue
-        delta = len(S[j] - cubierto)        # Δ_j: categorías de j que faltan por cubrir
-        if delta > mejor_delta:             # '>' estricto: en empate gana el menor índice
-            mejor, mejor_delta = j, delta
+        if not en_A[j]:                     # solo es candidato quien aún no está elegido
+            delta = len(S[j] - cubierto)    # Δ_j: categorías de j que faltan por cubrir
+            if delta > mejor_delta:         # '>' estricto: en empate gana el menor índice
+                mejor, mejor_delta = j, delta
     A.append(mejor)
     en_A[mejor] = True
     cubierto |= S[mejor]                    # ahora esas categorías ya están cubiertas
@@ -312,6 +311,7 @@ Todos los chequeos son obligatorios; si alguno falla, la ejecución termina con 
 - **Nodos independientes.** No se modelan relaciones entre nodos (grafo de influencia): la utilidad solo depende de las categorías que cubren.
 - **Categorías del caso incluido sintéticas.** La entrada recibida no traía categorías; si la profesora entrega otra definición de `f`, hay que cambiar `f_cobertura` y `seleccion_voraz_traza`; el resto no cambia. `f` no usa `coeficiente_utilidad` (que solo interviene en el reparto), y los desempates dependen del orden de los nodos en el archivo.
 - **Elección por defecto de `u_i` (`log`)** es una decisión de modelado del grupo; cambiable con `--utilidad` o `funcion_utilidad`.
+- **Algoritmo exacto por fuerza bruta.** Para esta entrega el óptimo exacto de la selección (`seleccion_exacta_ref`) se calcula por fuerza bruta, probando los `C(N,k)` subconjuntos. En la próxima entrega se reemplazará por una solución con programación dinámica.
 - **Escala.** `O(k·N·s)` en selección; la fuerza bruta de referencia se omite si `C(N,k) > 2·10⁶`, y en ese caso no se verifica la garantía `(1−1/e)`.
 - **Precisión.** Utilidades en `float`; las comparaciones usan tolerancia `1e-9`. `B` se trata como entero pequeño (el reparto es `O(B log k)`).
 - **Tiempos** de una sola máquina, con ruido del sistema operativo; con casos de fracciones de milisegundo la desviación relativa es grande.

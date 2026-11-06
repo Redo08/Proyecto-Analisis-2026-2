@@ -48,6 +48,7 @@ Los coeficientes de utilidad vienen de la entrada recibida; las **categorías de
 - Selección: N03, N10, N08, N09, N01 con f(A) = 20 categorías cubiertas (coincide con el óptimo exacto).
 - Reparto de B = 30 (con la utilidad por defecto `log`): N03=5, N10=8, N08=6, N09=6, N01=5 (utilidad 98.67).
 - Todas las restricciones se cumplen, incluida la coincidencia con las implementaciones de `Informe/code/algoritmos.py`.
+- **Nota:** el algoritmo exacto (referencia para medir al voraz) se hizo por **fuerza bruta** en esta entrega; en la próxima se reemplazará por programación dinámica.
 - Es la solución **base**: no incluye las variantes (costos de participación distintos, rondas con fallas, nodos relacionados). Si un caso trae esos campos (`grafo`, `numero_rondas`, costos...), se ignoran.
 
 ## Estructura

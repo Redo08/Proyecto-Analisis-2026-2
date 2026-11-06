@@ -35,11 +35,10 @@ def seleccion_voraz(S, k):
     for _ in range(k):                            # k pasos
         mejor, mejor_delta = None, -1
         for j in range(len(S)):                   # revisa los N nodos
-            if j in A:
-                continue
-            delta = len(S[j] - cubierto)          # Δ_j(A): lo nuevo que trae j
-            if delta > mejor_delta:
-                mejor, mejor_delta = j, delta
+            if j not in A:
+                delta = len(S[j] - cubierto)      # Δ_j(A): lo nuevo que trae j
+                if delta > mejor_delta:
+                    mejor, mejor_delta = j, delta
         A.append(mejor)                           # agrega el de mayor Δ
         cubierto |= S[mejor]
     return A, len(cubierto)

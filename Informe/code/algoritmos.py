@@ -86,12 +86,11 @@ def seleccion_voraz(S, k):
     for _ in range(k):                                    # una vuelta por lugar del cupo
         mejor, mejor_delta = -1, -1
         for j in range(N):
-            if en_A[j]:
-                continue                                  # ya está en el grupo
-            delta = len(S[j] - cubierto)                  # Delta_j(A) = |S_j \ C(A)|
-            evaluaciones += 1
-            if delta > mejor_delta:
-                mejor, mejor_delta = j, delta
+            if not en_A[j]:                               # los que ya están en el grupo se saltan
+                delta = len(S[j] - cubierto)              # Delta_j(A) = |S_j \ C(A)|
+                evaluaciones += 1
+                if delta > mejor_delta:
+                    mejor, mejor_delta = j, delta
         A.append(mejor)
         en_A[mejor] = True
         cubierto |= S[mejor]

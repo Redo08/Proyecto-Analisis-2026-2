@@ -65,12 +65,11 @@ def seleccion_voraz_traza(S, k, traza=None):
         deltas = {}
         mejor, mejor_delta = None, -1
         for j in range(N):
-            if en_A[j]:
-                continue
-            delta = len(S[j] - cubierto)      # Delta_j(A)
-            deltas[j] = delta
-            if delta > mejor_delta:           # '>' estricto: gana el menor índice en empates
-                mejor, mejor_delta = j, delta
+            if not en_A[j]:                   # solo los nodos que aún no están en A
+                delta = len(S[j] - cubierto)  # Delta_j(A)
+                deltas[j] = delta
+                if delta > mejor_delta:       # '>' estricto: gana el menor índice en empates
+                    mejor, mejor_delta = j, delta
         nuevas = sorted(S[mejor] - cubierto)
         A.append(mejor)
         en_A[mejor] = True
