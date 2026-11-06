@@ -4,7 +4,7 @@
     "cupo_participantes_por_ronda_k": 5,
     "presupuesto_ruido_por_ronda_B": 30
   },
-  "_origen_categorias": "sintéticas: semilla 2026, universo 20, 3 a 7 por nodo (src/generar_categorias.py)",
+  "_origen_categorias": "sintéticas: semilla 2026, universo 20, 3 a 7 por nodo (src/generar_categorias.py), ajustado con el monitor",
   "nodos": [
     {
       "id": "N01",
