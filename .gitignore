@@ -1,2 +1,17 @@
 __pycache__/
 *.pyc
+
+# Archivos de compilación LaTeX
+Informe/*.aux
+Informe/*.log
+Informe/*.out
+Informe/*.toc
+Informe/*.bbl
+Informe/*.bbl-SAVE-ERROR
+Informe/*.blg
+Informe/*.bcf
+Informe/*.run.xml
+Informe/*.fdb_latexmk
+Informe/*.fls
+Informe/*.synctex.gz
+Informe/*.atfi
