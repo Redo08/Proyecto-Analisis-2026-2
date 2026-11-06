@@ -1,14 +1,13 @@
 # Proyecto Análisis de Algoritmos 2026-2 — Subproyecto 2: solución base
 
 Selección de participantes y reparto del presupuesto de ruido en una red de aprendizaje colaborativo.
-**Versión 1.1.0** (archivo [VERSION](VERSION)).
 
 ## Ejecutar
 
 Requisito: **Python 3.10 o superior**. No hay que instalar nada: la ejecución de casos solo usa la biblioteca estándar.
 
 ```bash
-git clone <repositorio> && cd RepoProyecto
+git clone https://github.com/Redo08/Proyecto-Analisis-2026-2.git
 python src/ejecutar_casos.py                  # 1. ejecuta todos los casos de casos/
 ```
 2. Abrir `resultados/resumen.md` y `resultados/<caso>/traza.md`.
